@@ -103,7 +103,7 @@ export default function HubungiKami() {
 
               <div
                 className="d-flex justify-content-start gap-6 pt-6"
-                style={{ paddingLeft: "26px" }}
+                style={{ paddingLeft: "18px" }}
               >
                 {socialMedia.map((social, index) => (
                   <a
