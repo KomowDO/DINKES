@@ -1,12 +1,15 @@
 .tutorial-section {
   background-color: #f9fafb; /
-  padding: 3rem 1rem; 
+  padding-top: 3rem;     /* <-- Ganti angka 3rem ini (misal 5rem) */
+  padding-bottom: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .video-responsive-wrapper {
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%;
+  padding-top: 50.25%;
   border-radius: 12px; 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
 }

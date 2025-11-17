@@ -6,8 +6,21 @@ export default function Tutorial() {
     "https://www.youtube.com/embed/V85bJKb6QZk?playlist=5pdjm3VwcO8,J-mqWoenbMI,PM81jL-T6pU,prBx4guk-0Y,tXK-KP6mTE0,AGxtjmgufEg,ZNvr1yFLURQ,1E5Eq_cZ9I8,4XPCca0MOPU";
 
   return (
-    <section className="tutorial-section">
-      <div className="container-md">
+    // ===== STYLE UNTUK PADDING TAMBAHAN =====
+    <section
+      className="tutorial-section"
+      style={{
+        paddingTop: "5rem" /* <-- ATUR JARAK ATAS DI SINI */,
+        paddingBottom: "5rem",
+        paddingLeft: "1rem",
+        paddingRight: "1rem",
+      }}
+    >
+      {/************************************/}
+
+      <div className="container-fluid">
+        {" "}
+        {/* Ini sudah benar (container-fluid) */}
         <div className="video-responsive-wrapper">
           <iframe
             src={playlistSrc}
