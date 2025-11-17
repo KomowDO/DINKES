@@ -1,5 +1,3 @@
-/* --- Style untuk Komponen Structure --- */
-
 .bg-green-light {
   background-color: #e8f0ef;
 }
@@ -55,10 +53,6 @@
   border-radius: 3px;
 }
 
-/* =========================================== */
-/* ===== BAGIAN INI YANG DIPERBAIKI ===== */
-/* =========================================== */
-
 .image-text-container {
   position: relative;
   display: flex;
@@ -72,12 +66,9 @@
 }
 .image-text-container .overlay-text {
   position: absolute;
-
-  /* 2. Diubah posisinya agar menempel di kiri */
   top: 30%;
-  left: 1.5rem; /* Jarak dari tepi kiri */
-  transform: translateY(-50%); /* Hanya geser vertikal */
-
+  left: 1.5rem;
+  transform: translateY(-50%);
   font-size: 7rem;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
@@ -85,8 +76,6 @@
   text-align: left;
   white-space: pre-line;
   color: transparent;
-
-  /* 3. Warna diubah agar sesuai Figma */
   -webkit-text-stroke: 2px #a7d9d5;
   z-index: 1;
   pointer-events: none;
@@ -95,20 +84,10 @@
   max-width: 100%;
   height: auto;
   max-height: 570px;
-
-  /* 4. 'margin-left: 150px' sudah dihapus */
-
   position: relative;
   z-index: 2;
-  /* align-self: center membuat gambar tetap di tengah, 
-     walaupun parent-nya (container) rata kiri. Ini sudah benar. */
   align-self: center;
 }
-
-/* =========================================== */
-/* ===== RESPONSIVE JUGA DIPERBAIKI ===== */
-/* =========================================== */
-
 @media (max-width: 992px) {
   .row {
     flex-direction: column;
@@ -116,17 +95,17 @@
   .image-text-container {
     height: auto;
     margin-bottom: 40px;
-    align-items: flex-start; /* Pastikan rata kiri */
+    align-items: flex-start;
   }
   .image-text-container .overlay-text {
     font-size: 4rem;
     top: 20%;
-    text-align: left; /* Pastikan rata kiri */
-    left: 1.5rem; /* Samakan jarak */
+    text-align: left;
+    left: 1.5rem;
     transform: translateY(-50%);
   }
   .image-text-container img {
-    margin-left: 0; /* Pastikan margin 0 di tablet/hp */
+    margin-left: 0;
     max-height: 300px;
     align-self: center;
   }

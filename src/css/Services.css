@@ -1,5 +1,3 @@
-/* Custom CSS untuk ServiceGrid */
-
 .py-16 {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -47,7 +45,9 @@
 .service-card {
   background-color: #ededed;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
   padding: 1.5rem;
   width: 14.375rem;
   height: 7.938rem;
@@ -104,7 +104,8 @@
 
 /* Hover Effects */
 .service-hover-effect:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
   transform: scale(1.05);
 }
@@ -128,7 +129,7 @@
 
 /* Spacing */
 .mt-15 {
-  margin-top: 3.75rem; /* Atau sesuaikan dengan kebutuhan */
+  margin-top: 3.75rem;
 }
 
 /* Responsive */

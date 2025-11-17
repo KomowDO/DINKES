@@ -1,11 +1,8 @@
-/* ====================== HERO CONTAINER ====================== */
 .hero-container {
   background-color: #f9fafb; /* bg-gray-50 */
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
-/* ====================== HEADER BAR ====================== */
 
 .btn-disabilitas {
   background-color: #fbbf24;
@@ -133,25 +130,19 @@
   }
 }
 
-/* ====================== HERO CONTENT ====================== */
-
-/* PERBAIKAN: Hapus semua style rumit */
 .hero-content {
-  line-height: 0; /* Menghilangkan spasi ekstra di bawah gambar */
+  line-height: 0;
 }
 
 .hero-image-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
-  /* Biarkan kosong, tidak perlu style */
 }
 
 .hero-image {
-  /* Biarkan 'img-fluid' dari Bootstrap yang bekerja (width: 100%; height: auto;) */
 }
 
-/* HAPUS SEMUA STYLE .hero-text DAN MEDIA QUERY-NYA */
 .hero-text {
 }
 @media (min-width: 768px) {
