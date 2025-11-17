@@ -1,0 +1,98 @@
+/* Custom styles for TangerangNewsApp */
+
+.news-card {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-image-container {
+  height: 230px;
+  overflow: hidden;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #adadad;
+  opacity: 50%;
+  border: none;
+  transition: all 0.3s ease;
+  margin: 0;
+  padding: 0;
+  display: block;
+  flex-shrink: 0;
+}
+.indicator.active {
+  width: 8px;
+  background-color: #adadad;
+  opacity: 100%;
+}
+
+.tab-btn {
+  border: 2px solid #2ca29d;
+  color: #2ca29d;
+  font-weight: 600;
+  border-radius: 0.875rem;
+  padding: 0.6rem 1.5rem;
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  border-color: #2ca29d;
+  box-shadow: 0 0 0.4rem rgba(13, 110, 253, 0.3);
+}
+.tab-btn.active {
+  background: #2ca29d;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  border: none;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  background: none;
+  transition: all 0.2s ease;
+}
+.calendar-day:hover {
+  background-color: #e7f1ff;
+}
+.calendar-day.today {
+  background-color: #cfe2ff;
+  font-weight: bold;
+}
+.calendar-day.event {
+  background: #f6d046;
+  color: black;
+}
+.calendar-day.selected {
+  background: #69e07b;
+  color: black;
+  transform: scale(1.1);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.hover-bg-light:hover {
+  background: linear-gradient(90deg, #e9f2ff, #eef2ff);
+}
+
+.calender-container {
+  height: 500px;
+  background-color: #edf2ff;
+}
+.text-blue {
+  color: #2ca29d;
+}

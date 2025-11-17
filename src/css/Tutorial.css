@@ -1,0 +1,29 @@
+.tutorial-section {
+  background-color: #f9fafb; /* Latar belakang abu-abu muda */
+  padding: 3rem 1rem; /* Jarak atas-bawah */
+}
+
+/* Wrapper ini penting untuk membuat iframe 
+  memiliki rasio aspek 16:9 (layar lebar)
+*/
+.video-responsive-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* 56.25% adalah hasil dari 9 / 16, 
+     ini adalah trik untuk rasio 16:9 
+  */
+  padding-top: 56.25%;
+  border-radius: 12px; /* Sudut tumpul */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Bayangan */
+}
+
+/* Ini mengatur agar iframe (video player) 
+  mengisi penuh wrapper-nya
+*/
+.video-responsive-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

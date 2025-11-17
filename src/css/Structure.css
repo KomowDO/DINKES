@@ -1,0 +1,162 @@
+/* --- Style untuk Komponen Structure --- */
+
+.bg-green-light {
+  background-color: #e8f0ef;
+}
+.bg-green-card-light {
+  background-color: #d5eae9;
+}
+.bg-green-card-alt {
+  background-color: #ecf1ff;
+}
+.text-green-dark {
+  color: #2ca29d;
+}
+.text-green-title {
+  color: #2ca29d;
+  font-size: 1rem;
+}
+.text-green-jabatan {
+  color: #2ca29d;
+  font-size: 0.9rem;
+}
+.member-card {
+  width: 100%;
+  min-height: 130px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.member-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.member-img {
+  width: 90px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.custom-scrollbar {
+  height: 750px;
+  overflow-y: auto;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #2ca29d;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #dbeafe;
+  border-radius: 3px;
+}
+
+/* =========================================== */
+/* ===== BAGIAN INI YANG DIPERBAIKI ===== */
+/* =========================================== */
+
+.image-text-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  /* 1. Diubah ke flex-start agar teks menempel di kiri */
+  align-items: flex-start;
+  text-align: left;
+  height: 750px;
+}
+.image-text-container .overlay-text {
+  position: absolute;
+
+  /* 2. Diubah posisinya agar menempel di kiri */
+  top: 30%;
+  left: 1.5rem; /* Jarak dari tepi kiri */
+  transform: translateY(-50%); /* Hanya geser vertikal */
+
+  font-size: 7rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  white-space: pre-line;
+  color: transparent;
+
+  /* 3. Warna diubah agar sesuai Figma */
+  -webkit-text-stroke: 2px #a7d9d5;
+  z-index: 1;
+  pointer-events: none;
+}
+.image-text-container img {
+  max-width: 100%;
+  height: auto;
+  max-height: 570px;
+
+  /* 4. 'margin-left: 150px' sudah dihapus */
+
+  position: relative;
+  z-index: 2;
+  /* align-self: center membuat gambar tetap di tengah, 
+     walaupun parent-nya (container) rata kiri. Ini sudah benar. */
+  align-self: center;
+}
+
+/* =========================================== */
+/* ===== RESPONSIVE JUGA DIPERBAIKI ===== */
+/* =========================================== */
+
+@media (max-width: 992px) {
+  .row {
+    flex-direction: column;
+  }
+  .image-text-container {
+    height: auto;
+    margin-bottom: 40px;
+    align-items: flex-start; /* Pastikan rata kiri */
+  }
+  .image-text-container .overlay-text {
+    font-size: 4rem;
+    top: 20%;
+    text-align: left; /* Pastikan rata kiri */
+    left: 1.5rem; /* Samakan jarak */
+    transform: translateY(-50%);
+  }
+  .image-text-container img {
+    margin-left: 0; /* Pastikan margin 0 di tablet/hp */
+    max-height: 300px;
+    align-self: center;
+  }
+  .custom-scrollbar {
+    height: auto;
+    max-height: 500px;
+  }
+}
+@media (max-width: 576px) {
+  .image-text-container .overlay-text {
+    font-size: 2.5rem;
+    top: 18%;
+    left: 1rem;
+  }
+  .image-text-container img {
+    max-height: 200px;
+  }
+  .member-img {
+    width: 70px;
+    height: 80px;
+  }
+  .text-blue-title {
+    font-size: 0.9rem;
+  }
+  .text-blue-jabatan {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 992px) {
+  .col-left {
+    display: none !important;
+  }
+}

@@ -1,0 +1,304 @@
+/* Custom Colors (Tailwind-like) */
+.text-blue-800 {
+  color: #1e3a8a !important;
+}
+.text-blue-600 {
+  color: #2563eb !important;
+}
+.text-green-1 {
+  color: #2ca29d !important;
+}
+.text-gray-700 {
+  color: #374151 !important;
+}
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+.bg-white-1 {
+  background-color: #ffffff !important;
+}
+.bg-green-1 {
+  background-color: #2ca29d !important;
+}
+.bg-green-2 {
+  background-color: #2ca29d !important;
+}
+.bg-green-3 {
+  background-color: #2ca29d !important;
+}
+.bg-green-4 {
+  background-color: #2ca29d !important;
+}
+.bg-green-5 {
+  background-color: #2ca29d !important;
+}
+.bg-yellow-1 {
+  background-color: #fbbf24 !important;
+}
+.text-blue-800 {
+  color: #2547a4 !important;
+}
+
+/* === TAMBAHAN WARNA LATAR SOSMED === */
+.bg-red-600 {
+  background-color: #dc2626 !important;
+}
+.bg-blue-600 {
+  background-color: #2563eb !important;
+}
+.bg-pink-600 {
+  background-color: #db2777 !important;
+}
+.bg-blue-400 {
+  background-color: #60a5fa !important;
+}
+/* === AKHIR TAMBAHAN WARNA === */
+
+/* Hover effects */
+.bg-hover-gray-100:hover {
+  background-color: #f3f4f6 !important;
+}
+.group-hover-text-blue-600 {
+  /* Tidak bisa pakai group di Bootstrap, jadi kita ganti manual */
+}
+a .text-blue-800:hover {
+  color: #2563eb !important;
+}
+
+/* Social hover */
+.text-red-600-hover:hover {
+  color: #dc2626 !important;
+}
+.text-blue-600-hover:hover {
+  color: #2563eb !important;
+}
+.text-pink-600-hover:hover {
+  color: #db2777 !important;
+}
+.text-blue-400-hover:hover {
+  color: #60a5fa !important;
+}
+
+/* Typography */
+.fs-1 {
+  font-size: 1.875rem !important; /* 30px */
+}
+.fs-md-1 {
+  font-size: 2.25rem !important; /* 36px */
+}
+.fs-4 {
+  font-size: 1.25rem !important;
+}
+.fs-5 {
+  font-size: 1.125rem !important;
+}
+.fs-6 {
+  font-size: 0.875rem !important;
+}
+.text-sm {
+  font-size: 0.875rem !important;
+}
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+/* Spacing */
+.mb-10 {
+  margin-bottom: 2.5rem !important;
+}
+.mb-md-12 {
+  margin-bottom: 3rem !important;
+}
+.pt-6 {
+  padding-top: 1.5rem !important;
+}
+.gap-4 {
+  gap: 1rem !important;
+}
+.gap-6 {
+  gap: 1.5rem !important;
+}
+.rounded-lg {
+  border-radius: 0.5rem !important;
+}
+.rounded-xl {
+  border-radius: 0.75rem !important;
+}
+.lh-base {
+  line-height: 1.5 !important;
+}
+
+/* Responsive gutter override */
+.g-10 > * {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+.g-md-8 > * {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* Transitions */
+.transition-colors {
+  transition: color 0.3s ease;
+}
+
+/* ================================================= */
+/* ===== KODE FOOTER (BERSIH) ===== */
+/* ================================================= */
+
+.contact-footer-section {
+  padding: 0;
+  margin: 0;
+  background-color: #f9fafb; /* Latar belakang area di atas footer */
+
+  /* === TAMBAHAN OVERFLOW === */
+  /* Ini memotong gambar 'bawah.png' yang meluber ke samping */
+  overflow-x: hidden;
+}
+
+/* === TAMBAHAN UNTUK WRAPPER GAMBAR === */
+/* Ini adalah div yang membungkus bawah.png dan teks.png */
+.footer-image-stack {
+  position: relative;
+  /* Ini juga membantu memotong gambar yang meluber */
+  overflow: hidden;
+}
+/* === AKHIR TAMBAHAN === */
+
+/* Ini adalah gambar ilustrasi 'bawah.png' */
+.footer-illustration {
+  width: 100%;
+
+  /* === TAMBAHAN MAX-WIDTH === */
+  /* Ini mencegah gambar memaksa layar jadi lebar */
+  max-width: 100%;
+
+  height: auto;
+  display: block;
+  margin-bottom: 0; /* Menghapus margin negatif yang lama */
+}
+
+/* Ini adalah wrapper untuk footer HIJAU */
+.footer-content-wrapper {
+  background-color: #2ca29d; /* Warna teal Anda */
+  color: #ffffff;
+  padding: 3rem 1.5rem 2rem 1.5rem;
+
+  /* DIPERBAIKI: Sudut membulat dipindah ke bawah */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.footer-powered-by {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.footer-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.footer-address {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.footer-badge {
+  max-width: 150px;
+  height: auto;
+  margin-top: 1rem;
+}
+
+.footer-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Jarak antara ikon dan teks */
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-stats p {
+  font-size: 1rem;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+.footer-stats span {
+  font-weight: 700;
+  color: #ffffff;
+  margin-left: 0.5rem;
+}
+
+.footer-copyright {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Garis pemisah transparan */
+  text-align: center;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+/* SISA KODE LAMA (.footer-section-inner, .footer-image-stack, dll) 
+  TELAH DIHAPUS KARENA TIDAK DIPERLUKAN LAGI.
+*/
+.icon-circle {
+  /* Paksa jadi bujur sangkar sempurna */
+  width: 48px; /* 3rem. Anda bisa ganti angkanya */
+  height: 48px; /* HARUS SAMA DENGAN WIDTH */
+
+  /* Pastikan ikon tetap di tengah */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Mencegah icon-nya memengaruhi ukuran lingkaran */
+  flex-shrink: 0;
+}
+
+/* ===== TAMBAHKAN INI DI BAWAH ===== */
+.icon-circle img {
+  width: 32px; /* 24px adalah ukuran yang bagus */
+  height: 32px; /* Samakan dengan width */
+  object-fit: contain; /* Agar gambar tidak gepeng */
+}
+
+/* Untuk ikon dari Lucide (AlertCircle) */
+.icon-circle svg {
+  width: 24px;
+  height: 24px;
+}
