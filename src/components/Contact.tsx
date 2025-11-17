@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/contact.css"; // pastikan path CSS benar
+import "../css/contact.css";
 
 export default function HubungiKami() {
   const contactItems = [
@@ -35,12 +35,11 @@ export default function HubungiKami() {
       icon: <img src="/assets/lapor.png" alt="SP4N" />,
       title: "KEGAWAT DARURATAN",
       subtitle: "",
-      bgColor: "bg-green-5",
+      bgColor: "bg-yellow-1",
       link: "#",
     },
   ];
 
-  // --- Ikon dikecilkan (fs-4) dan diberi warna putih ---
   const socialMedia = [
     {
       icon: <i className="bi bi-youtube fs-3 text-blue-800"></i>,
@@ -104,7 +103,7 @@ export default function HubungiKami() {
 
               <div
                 className="d-flex justify-content-start gap-6 pt-6"
-                style={{ paddingLeft: "26px" }} // Padding 32px Anda
+                style={{ paddingLeft: "26px" }}
               >
                 {socialMedia.map((social, index) => (
                   <a
@@ -175,11 +174,8 @@ export default function HubungiKami() {
               }}
             />
           </div>
-          {/* Penutup footer-content-wrapper */}
         </div>
-        {/* Penutup footer-image-stack */}
       </footer>
-      {/* Penutup footer-section-inner */}
     </section>
   );
 }

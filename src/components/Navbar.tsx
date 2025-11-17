@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-// 1. HAPUS IMPORT LUCIDE-REACT YANG SUDAH TIDAK DIPAKAI
-// import { Youtube, Facebook, Instagram, Twitter } from "lucide-react";
 import "../css/Navbar.css";
 import api from "../services/api";
 
-// Interface (sudah dibersihkan dari spasi aneh)
 interface Menu {
   id_menu: string | number;
   menu_name: string;
@@ -83,9 +80,7 @@ function Navbar() {
 
   return (
     <nav className="bg-gradient-to-r-teal-custom text-white rounded-top-4 shadow-md overflow-visible">
-      {/* 2. TAMBAHKAN KEMBALI DIV PEMBUNGKUS INI */}
       <div className="d-flex align-items-center position-relative px-4 px-md-5 px-lg-6 px-xl-6 px-xxl-6 py-6 h-10">
-        {/* 1. Ikon Media Sosial (Sudah benar) */}
         <div className="d-none d-md-flex gap-3 position-absolute top-6 start-6 start-md-6 start-lg-6 start-xl-6 start-xxl-6">
           <a
             href="#"
@@ -113,7 +108,6 @@ function Navbar() {
           </a>
         </div>
 
-        {/* 2. Logo dan Judul */}
         <div className="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
           <img
             src="/assets/logo.png"
@@ -126,7 +120,6 @@ function Navbar() {
           </h1>
         </div>
 
-        {/* 3. Ikon Bendera */}
         <div className="d-flex gap-2 position-absolute top-6 end-6 end-md-6 end-lg-6 end-xl-6 end-xxl-6">
           <img
             src="/assets/indo2.png"
@@ -142,10 +135,7 @@ function Navbar() {
           />
         </div>
       </div>{" "}
-      {/* Penutup div pembungkus */}
-      {/* Garis Pemisah */}
       <div className="border-top border-white opacity-25"></div>
-      {/* Menu Navigasi */}
       <div className="w-100 overflow-x-auto navbar-wrapper">
         <div className="d-flex justify-content-center min-width-max px-3 px-md-5 px-lg-5 px-xl-5 px-xxl-5 py-3 font-semibold text-md">
           {renderMenus(menus)}
