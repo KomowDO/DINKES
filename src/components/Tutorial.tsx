@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Tutorial.css"; // Pastikan file CSS ini ada
+import "../css/Tutorial.css";
 
 export default function Tutorial() {
   const playlistSrc =
@@ -8,7 +8,6 @@ export default function Tutorial() {
   return (
     <section className="tutorial-section">
       <div className="container-md">
-        {/* Wrapper ini membuat video menjadi responsif 16:9 */}
         <div className="video-responsive-wrapper">
           <iframe
             src={playlistSrc}

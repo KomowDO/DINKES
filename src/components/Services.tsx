@@ -107,5 +107,4 @@ const ServicesSection: React.FC = () => {
   );
 };
 
-// Ekspor komponen utama
 export default ServicesSection;

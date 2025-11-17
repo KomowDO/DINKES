@@ -1,5 +1,4 @@
 import React from "react";
-// Meng-import file CSS eksternal
 import "../css/structure.css";
 
 const anggota = [
@@ -48,7 +47,6 @@ const anggota = [
 export default function Structure() {
   return (
     <div className="container-fluid px-3 px-md-4 bg-green-light">
-      {/* CSS sekarang dimuat dari file eksternal, tag <style> dihapus */}
       <div className="text-center mb-3 mb-md-4">
         <h1 className="text-green-dark fw-bold fs-3 fs-md-1">
           Daftar Pejabat Struktural
