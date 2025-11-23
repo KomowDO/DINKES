@@ -1,23 +1,21 @@
+/* ================= 1. UTILITY CLASSES & VARIABLES ================= */
 .bg-gradient-to-r-teal-custom {
-  background: linear-gradient(to right, #2ca29d, #12726d);
+  background: linear-gradient(90deg, #2ca29d 0%, #12726d 100%);
 }
 
+/* Ukuran & Font */
 .w-24 {
   width: 6rem;
 }
-
-.h-7 {
-  height: 1.75rem;
-}
-
 .w-7 {
   width: 1.75rem;
 }
-
+.h-7 {
+  height: 1.75rem;
+}
 .w-8 {
   width: 2rem;
 }
-
 .h-8 {
   height: 2rem;
 }
@@ -25,231 +23,122 @@
 .font-bold {
   font-weight: 700;
 }
-
 .font-semibold {
   font-weight: 600;
 }
-
 .text-lg {
   font-size: 1.125rem;
-  line-height: 1.75rem;
 }
-
 .text-md {
   font-size: 1rem;
 }
-
 .leading-snug {
   line-height: 1.375;
 }
-
 .tracking-wide {
   letter-spacing: 0.025em;
 }
 
+/* Warna */
+.text-white {
+  color: #ffffff;
+}
 .text-blue-900 {
   color: #1e3a8a;
 }
-
 .text-green-1 {
   color: #2ca29d;
 }
-
+.bg-white {
+  background-color: #ffffff;
+}
 .bg-blue-100 {
   background-color: #dbeafe;
 }
 
+/* States & Transitions */
 .hover-bg-blue-100:hover {
   background-color: #dbeafe;
 }
-
 .hover-text-decoration-underline:hover {
   text-decoration: underline;
 }
-
 .hover-opacity-80:hover {
   opacity: 0.8;
 }
-
 .hover-scale-110:hover {
   transform: scale(1.1);
 }
-
-.transition {
-  transition: all 0.3s ease;
-}
-
 .transition-transform {
   transition: transform 0.3s ease;
 }
-
 .transition-colors {
   transition:
     color 0.3s ease,
     background-color 0.3s ease;
 }
-
-.duration-300 {
-  transition-duration: 300ms;
-}
-
-.ease-out {
-  transition-timing-function: ease-out;
-}
-
-.shadow-md {
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
 
-.opacity-0 {
-  opacity: 0;
+/* Layout & Positioning */
+.d-flex {
+  display: flex;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.d-none {
+  display: none;
+}
+@media (min-width: 992px) {
+  .d-md-flex {
+    display: flex !important;
+  }
 }
 
-.opacity-25 {
-  opacity: 0.25;
+.flex-column {
+  flex-direction: column;
 }
-
-.translate-y-2 {
-  transform: translateY(0.5rem);
+.flex-grow-1 {
+  flex-grow: 1;
 }
-
-.invisible {
-  visibility: hidden;
+.justify-content-center {
+  justify-content: center;
 }
-
+.align-items-center {
+  align-items: center;
+}
 .position-relative {
   position: relative;
 }
-
 .position-absolute {
   position: absolute;
 }
 
-.top-100 {
-  top: 100%;
-}
-
-.top-0 {
-  top: 0;
-}
-
-.start-0 {
-  left: 0;
-}
-
-.start-100 {
-  left: 100%;
-}
-
-.ms-1 {
-  margin-left: 0.25rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.z-index-99 {
-  z-index: 99;
-}
-
-.min-width-200px {
-  min-width: 200px;
-}
-
-.min-width-max {
-  min-width: max-content;
-}
-
-.whitespace-nowrap {
-  white-space: nowrap;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
-/* Responsive rounded top */
-.rounded-top-4 {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-/* ... (class .rounded-top-sm-4 dst. bisa dihapus jika tidak dipakai) ... */
-
-/* Overflow utilities */
-.lg-overflow-visible {
-  overflow: visible;
-}
-
-/* Gap utilities */
+/* GAP (JARAK) */
 .gap-2 {
   gap: 0.5rem;
 }
 .gap-3 {
   gap: 0.75rem;
 }
-.gap-5 {
-  gap: 1.25rem;
+
+/* --- KHUSUS: JARAK ANTAR MENU UTAMA DESKTOP --- */
+.gap-custom {
+  gap: 3rem;
+}
+@media (max-width: 1200px) {
+  .gap-custom {
+    gap: 1.5rem;
+  }
 }
 
-/* Top positioning */
-.top-6 {
-  top: 1.5rem;
+/* Margins & Paddings */
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
-
-/* Start positioning */
-.start-6 {
-  left: 1.5rem;
-}
-
-.end-6 {
-  right: 1.5rem;
-}
-
-/* Responsive start positioning */
-.start-md-6 {
-  left: 1.5rem;
-}
-.start-lg-6 {
-  left: 1.5rem;
-}
-.start-xl-6 {
-  left: 1.5rem;
-}
-.start-xxl-6 {
-  left: 1.5rem;
-}
-
-.end-md-6 {
-  right: 1.5rem;
-}
-.end-lg-6 {
-  right: 1.5rem;
-}
-.end-xl-6 {
-  right: 1.5rem;
-}
-.end-xxl-6 {
-  right: 1.5rem;
-}
-
-/* Text decoration */
-.text-decoration-underline {
-  text-decoration: underline;
-}
-
-/* Padding responsive */
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -258,26 +147,6 @@
   padding-left: 3rem;
   padding-right: 3rem;
 }
-.px-lg-6 {
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-.px-xl-6 {
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-.px-xxl-6 {
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-
-/* Padding horizontal */
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
-/* Padding vertikal */
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -290,179 +159,274 @@
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
-
-/* Margin bottom */
 .mb-3 {
   margin-bottom: 0.75rem;
 }
-
-/* Margin top */
 .mt-7 {
   margin-top: 1.75rem;
 }
-
-/* Flex utilities */
-.flex-grow-1 {
-  flex-grow: 1;
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.ms-1 {
+  margin-left: 0.25rem;
 }
 
-/* Display utilities */
-.d-inline-block {
-  display: inline-block;
+/* Specific Positioning (Logo/Icons) */
+.top-6 {
+  top: 1.5rem;
 }
-.d-flex {
-  display: flex;
+.start-6 {
+  left: 1.5rem;
 }
-.flex-column {
-  flex-direction: column;
+.end-6 {
+  right: 1.5rem;
 }
-.justify-content-center {
-  justify-content: center;
-}
-.justify-content-between {
-  justify-content: space-between;
-}
-.align-items-center {
-  align-items: center;
+@media (min-width: 992px) {
+  .start-md-6 {
+    left: 1.5rem;
+  }
+  .end-md-6 {
+    right: 1.5rem;
+  }
 }
 
-/* === GAYA SUBMENU (SANGAT PENTING) === */
+/* Border & Misc */
+.rounded-circle {
+  border-radius: 50%;
+}
+.rounded-top-4 {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.border-top {
+  border-top: 1px solid;
+}
+.border-white {
+  border-color: #ffffff;
+}
+.opacity-25 {
+  opacity: 0.25;
+}
+.opacity-100 {
+  opacity: 1;
+}
+.min-width-max {
+  min-width: max-content;
+}
+.min-width-200px {
+  min-width: 200px;
+}
+
+/* ================= 2. DESKTOP NAVBAR WRAPPER ================= */
 
 .navbar-wrapper {
-  overflow-x: auto;
-  overflow-y: visible;
-  padding-bottom: 300px;
-  margin-bottom: -300px;
+  width: 100%;
+  position: relative;
+  /* Desktop: Visible agar dropdown bisa keluar */
+  overflow: visible;
+  padding-bottom: 0;
 }
 
+/* Parent Menu Item */
 .navbar-menu-item {
   position: relative;
   display: inline-block;
 }
 
+/* Link Menu */
 .navbar-menu-link {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  display: inline-block;
-  transition:
-    color 0.3s ease-out,
-    text-decoration 0.3s ease-out;
   text-decoration: none;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
 
-.navbar-menu-link:hover {
-  text-decoration: underline;
-}
-
-.submenu-hidden a {
-  display: block;
-  padding: 0.6rem 1rem;
-  color: #1e3a8a;
-  font-weight: 500;
-  text-decoration: none;
-  border-radius: 0.375rem;
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.2s ease;
-}
-
-.submenu-hidden a:hover {
-  background-color: #eff6ff;
-  color: #1d4ed8;
-  transform: translateX(3px);
-}
+/* ================= 3. DESKTOP DROPDOWN (HOVER) ================= */
 
 .submenu-hidden {
-  opacity: 0;
-  transform: translateY(8px);
+  position: absolute;
   background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  z-index: 999;
   min-width: 220px;
-  position: absolute;
-  pointer-events: none;
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  z-index: 1000; /* Layer atas */
+
+  /* Animasi Hide */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease-in-out;
 }
 
-.navbar-menu-item:hover .submenu-hidden {
+/* Trigger Hover */
+.navbar-menu-item:hover > .submenu-hidden {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
-  pointer-events: auto;
 }
 
-.navbar-menu-item:hover .submenu-hidden.top-0.start-100.ms-1 {
+/* Posisi Dropdown Desktop */
+.top-100 {
+  top: 100%;
+}
+.start-0 {
+  left: 0;
+}
+.top-0 {
   top: 0;
+}
+.start-100 {
   left: 100%;
-  margin-left: 0.25rem;
 }
 
-.submenu-hidden .submenu-hidden {
-  transition-delay: 0.05s;
-}
+/* ================= 4. MOBILE RESPONSIVE STYLES ================= */
 
-.batik {
-  position: absolute;
-  inset-inline-end: 5px;
-  inset-block-start: 25px;
-}
-
-/* ===== KODE CSS BARU UNTUK PERBAIKAN POSISI IKON ===== */
-
-.navbar-container {
-  padding-top: 4.5rem;
-  position: relative;
-  background-color: #ffffff;
-}
-
-.navbar-main-content {
-  width: 100%;
-}
-
-.navbar-social-icons {
-  /* INILAH PERBAIKANNYA */
-  top: -0.5rem;
-  left: 1rem;
-  z-index: 10;
-}
-
-.navbar-flag-icons {
-  /* INILAH PERBAIKANNYA */
-  top: -0.5rem;
-  right: 1rem;
-  z-index: 10;
-}
-
-.social-icon-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  background-color: white;
-  color: #12726d;
-  border: 1px solid #e0e0e0;
-  border-radius: 50%;
+/* Default: Hamburger sembunyi di Desktop */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
   cursor: pointer;
+  padding: 0;
+  z-index: 50;
+}
+
+/* Overlay Gelap */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.mobile-menu-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Sidebar Menu */
+.mobile-menu-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Sembunyi di kiri */
+  width: 280px;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  z-index: 9999;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.mobile-menu-sidebar.open {
+  left: 0; /* Muncul */
+}
+
+/* Mobile Header */
+.mobile-menu-header {
+  background: linear-gradient(90deg, #2ca29d 0%, #12726d 100%);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+/* Mobile List */
+.mobile-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mobile-menu-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+.mobile-menu-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.mobile-menu-link.active {
+  background-color: #f0fdfa;
+  color: #12726d;
 }
 
-.social-icon-wrapper:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-color: #2ca29d;
-  color: #2ca29d;
+/* Mobile Submenu (Accordion) */
+.mobile-submenu {
+  background-color: #f8f9fa;
+  display: none;
+  padding-left: 0;
+  list-style: none;
+}
+.mobile-submenu.open {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+.mobile-submenu-link {
+  display: block;
+  padding: 12px 20px 12px 35px;
+  text-decoration: none;
+  color: #555;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #eee;
 }
 
-.h-10-content {
-  min-height: 12rem;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === MEDIA QUERIES UNTUK HP/TABLET (< 992px) === */
+@media (max-width: 992px) {
+  /* Sembunyikan Menu Horizontal Desktop */
+  .navbar-wrapper {
+    display: none !important;
+  }
+
+  /* Tampilkan Tombol Hamburger */
+  .hamburger-btn {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  /* Reset posisi absolute elemen lain agar tidak tumpang tindih */
+  .start-6,
+  .start-md-6 {
+    left: auto !important;
+  }
+
+  /* Sembunyikan Social Icons Desktop di HP */
+  .d-none.d-md-flex {
+    display: none !important;
+  }
 }

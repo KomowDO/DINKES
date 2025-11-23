@@ -1,22 +1,109 @@
-.tutorial-section {
-  background-color: #f9fafb; /
-  padding-top: 3rem;     /* <-- Ganti angka 3rem ini (misal 5rem) */
-  padding-bottom: 3rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* ================= VARIABLES ================= */
+:root {
+  --blue-primary: #005b96;
+  --blue-light: #e6f2ff;
 }
 
-.video-responsive-wrapper {
-  position: relative;
-  overflow: hidden;
-  padding-top: 50.25%;
-  border-radius: 12px; 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
+.text-blue {
+  color: var(--blue-primary);
 }
-.video-responsive-wrapper iframe {
+
+/* ================= UTILS ================= */
+
+/* Membatasi teks hanya 2 baris lalu ... */
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 2.6em;
+  line-height: 1.3;
+}
+
+.ls-1 {
+  letter-spacing: 1px;
+}
+
+/* ================= PLAYLIST STYLING ================= */
+
+/* Custom Scrollbar */
+.playlist-scroll {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ccc transparent;
+  scroll-behavior: smooth;
+}
+
+/* Webkit Scrollbar (Chrome, Safari) */
+.playlist-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.playlist-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.playlist-scroll::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 10px;
+}
+
+/* ================= PLAYLIST ITEM CARD ================= */
+
+.playlist-item {
+  width: 180px; /* Lebar tetap agar rapi */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.playlist-item .wrapper-img {
+  height: 100px;
+  overflow: hidden;
+}
+
+.playlist-item img {
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+/* Efek Hover */
+.playlist-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.playlist-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Overlay Icon Play */
+.play-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.playlist-item:hover .play-overlay {
+  opacity: 1;
+}
+
+/* ================= ACTIVE STATE ================= */
+
+/* Style khusus video yang sedang diputar */
+.playlist-item.active-video {
+  border: 2px solid var(--blue-primary) !important;
+  background-color: var(--blue-light);
+}
+
+.playlist-item.active-video .play-overlay {
+  opacity: 1;
+  background: rgba(0, 91, 150, 0.4);
 }
