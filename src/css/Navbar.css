@@ -39,7 +39,7 @@
   letter-spacing: 0.025em;
 }
 
-/* Warna */
+/* Warna Text */
 .text-white {
   color: #ffffff;
 }
@@ -49,6 +49,8 @@
 .text-green-1 {
   color: #2ca29d;
 }
+
+/* Backgrounds */
 .bg-white {
   background-color: #ffffff;
 }
@@ -56,32 +58,21 @@
   background-color: #dbeafe;
 }
 
-/* States & Transitions */
+/* States */
 .hover-bg-blue-100:hover {
   background-color: #dbeafe;
-}
-.hover-text-decoration-underline:hover {
-  text-decoration: underline;
 }
 .hover-opacity-80:hover {
   opacity: 0.8;
 }
-.hover-scale-110:hover {
-  transform: scale(1.1);
-}
 .transition-transform {
   transition: transform 0.3s ease;
-}
-.transition-colors {
-  transition:
-    color 0.3s ease,
-    background-color 0.3s ease;
 }
 .cursor-pointer {
   cursor: pointer;
 }
 
-/* Layout & Positioning */
+/* Layout Defaults */
 .d-flex {
   display: flex;
 }
@@ -100,9 +91,6 @@
 .flex-column {
   flex-direction: column;
 }
-.flex-grow-1 {
-  flex-grow: 1;
-}
 .justify-content-center {
   justify-content: center;
 }
@@ -116,15 +104,13 @@
   position: absolute;
 }
 
-/* GAP (JARAK) */
+/* GAP & Margins */
 .gap-2 {
   gap: 0.5rem;
 }
 .gap-3 {
   gap: 0.75rem;
 }
-
-/* --- KHUSUS: JARAK ANTAR MENU UTAMA DESKTOP --- */
 .gap-custom {
   gap: 3rem;
 }
@@ -134,7 +120,6 @@
   }
 }
 
-/* Margins & Paddings */
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -143,21 +128,9 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
-.px-md-5 {
-  padding-left: 3rem;
-  padding-right: 3rem;
-}
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 .mb-3 {
   margin-bottom: 0.75rem;
@@ -165,14 +138,8 @@
 .mt-7 {
   margin-top: 1.75rem;
 }
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.ms-1 {
-  margin-left: 0.25rem;
-}
 
-/* Specific Positioning (Logo/Icons) */
+/* --- POSITIONING DESKTOP --- */
 .top-6 {
   top: 1.5rem;
 }
@@ -191,56 +158,31 @@
   }
 }
 
-/* Border & Misc */
+/* Border & Logo */
 .rounded-circle {
   border-radius: 50%;
-}
-.rounded-top-4 {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-.rounded-md {
-  border-radius: 0.375rem;
 }
 .shadow-md {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
-.border-top {
-  border-top: 1px solid;
-}
-.border-white {
-  border-color: #ffffff;
-}
-.opacity-25 {
-  opacity: 0.25;
-}
-.opacity-100 {
-  opacity: 1;
-}
-.min-width-max {
-  min-width: max-content;
-}
-.min-width-200px {
-  min-width: 200px;
+.logo-img {
+  width: 6rem;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 /* ================= 2. DESKTOP NAVBAR WRAPPER ================= */
-
 .navbar-wrapper {
   width: 100%;
   position: relative;
-  /* Desktop: Visible agar dropdown bisa keluar */
   overflow: visible;
   padding-bottom: 0;
 }
-
-/* Parent Menu Item */
 .navbar-menu-item {
   position: relative;
   display: inline-block;
 }
-
-/* Link Menu */
 .navbar-menu-link {
   text-decoration: none;
   white-space: nowrap;
@@ -248,8 +190,7 @@
   transition: opacity 0.2s;
 }
 
-/* ================= 3. DESKTOP DROPDOWN (HOVER) ================= */
-
+/* Submenu Desktop */
 .submenu-hidden {
   position: absolute;
   background-color: #ffffff;
@@ -257,51 +198,37 @@
   padding: 0.5rem 0;
   border-radius: 0.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  z-index: 1000; /* Layer atas */
-
-  /* Animasi Hide */
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.2s ease-in-out;
 }
-
-/* Trigger Hover */
 .navbar-menu-item:hover > .submenu-hidden {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-/* Posisi Dropdown Desktop */
-.top-100 {
-  top: 100%;
+/* ================= 3. MOBILE SIDEBAR (FOLDABLE MENU) ================= */
+.mobile-menu-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  z-index: 9999;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
-.start-0 {
+.mobile-menu-sidebar.open {
   left: 0;
 }
-.top-0 {
-  top: 0;
-}
-.start-100 {
-  left: 100%;
-}
 
-/* ================= 4. MOBILE RESPONSIVE STYLES ================= */
-
-/* Default: Hamburger sembunyi di Desktop */
-.hamburger-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-  padding: 0;
-  z-index: 50;
-}
-
-/* Overlay Gelap */
 .mobile-menu-overlay {
   position: fixed;
   top: 0;
@@ -319,26 +246,6 @@
   opacity: 1;
 }
 
-/* Sidebar Menu */
-.mobile-menu-sidebar {
-  position: fixed;
-  top: 0;
-  left: -300px; /* Sembunyi di kiri */
-  width: 280px;
-  height: 100vh;
-  background-color: #ffffff;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-  transition: left 0.3s ease-in-out;
-  z-index: 9999;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-.mobile-menu-sidebar.open {
-  left: 0; /* Muncul */
-}
-
-/* Mobile Header */
 .mobile-menu-header {
   background: linear-gradient(90deg, #2ca29d 0%, #12726d 100%);
   padding: 1.5rem;
@@ -347,15 +254,10 @@
   justify-content: space-between;
   color: white;
 }
-
-/* Mobile List */
 .mobile-menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-.mobile-menu-item {
-  border-bottom: 1px solid #f0f0f0;
 }
 .mobile-menu-link {
   display: flex;
@@ -365,20 +267,19 @@
   text-decoration: none;
   color: #333;
   font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
 }
-.mobile-menu-link.active {
-  background-color: #f0fdfa;
-  color: #12726d;
+.mobile-menu-link:hover {
+  background-color: #f9f9f9;
 }
 
-/* Mobile Submenu (Accordion) */
 .mobile-submenu {
-  background-color: #f8f9fa;
   display: none;
-  padding-left: 0;
+  background: #f8f9fa;
   list-style: none;
+  padding-left: 0;
+  margin: 0;
+  border-bottom: 1px solid #eee;
 }
 .mobile-submenu.open {
   display: block;
@@ -392,6 +293,9 @@
   font-size: 0.9rem;
   border-bottom: 1px solid #eee;
 }
+.mobile-submenu-link:hover {
+  color: #2ca29d;
+}
 
 @keyframes slideDown {
   from {
@@ -404,29 +308,177 @@
   }
 }
 
-/* === MEDIA QUERIES UNTUK HP/TABLET (< 992px) === */
+/* ================= 4. MOBILE HEADER LAYOUT (LOGO KECIL & ICON LINGKARAN) ================= */
+
 @media (max-width: 992px) {
-  /* Sembunyikan Menu Horizontal Desktop */
+  /* A. RESET PARENT CONTAINER (FIX BAGIAN PUTIH KANAN) */
+  html,
+  body,
+  #root,
+  .app-layout {
+    width: 100% !important; /* Gunakan 100%, BUKAN 100vw */
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important; /* Mencegah scroll horizontal */
+    position: relative;
+  }
+
+  /* B. NAV UTAMA (BACKGROUND HIJAU) */
+  nav {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+
+    /* GRADASI HIJAU */
+    background: linear-gradient(90deg, #2ca29d 0%, #12726d 100%) !important;
+    background-color: #2ca29d !important;
+
+    /* Padding bawah pas (tidak terlalu tinggi) */
+    padding: 15px 15px 20px 15px !important;
+
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 120px !important;
+    border-radius: 0 !important;
+    position: relative;
+    z-index: 40;
+  }
+
+  /* C. RESET NAVBAR-WRAPPER (TRANSPARAN) */
   .navbar-wrapper {
-    display: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    box-shadow: none !important;
+    overflow: visible !important;
   }
 
-  /* Tampilkan Tombol Hamburger */
-  .hamburger-btn {
-    display: block;
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-  }
-
-  /* Reset posisi absolute elemen lain agar tidak tumpang tindih */
+  /* D. ICON SOSMED (KIRI ATAS) */
+  .d-none.d-md-flex,
   .start-6,
   .start-md-6 {
-    left: auto !important;
+    display: flex !important;
+    position: absolute !important;
+    top: 15px !important;
+    left: 15px !important;
+    gap: 12px !important;
+    z-index: 50;
   }
 
-  /* Sembunyikan Social Icons Desktop di HP */
-  .d-none.d-md-flex {
+  /* FORCE TRANSPARENT BG CONTAINER */
+  .start-6,
+  .start-6 div,
+  .start-6 span {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* --- LINGKARAN PUTIH UNTUK ICON --- */
+  .start-6 a,
+  .d-none.d-md-flex a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #ffffff !important; /* Lingkaran Putih */
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    text-decoration: none !important;
+  }
+
+  /* WARNA ICON (HIJAU) */
+  .start-6 a i,
+  .start-6 a svg,
+  .d-none.d-md-flex a i {
+    color: #2ca29d !important;
+    fill: #2ca29d !important;
+    font-size: 1rem !important;
+  }
+
+  /* E. BENDERA (KANAN ATAS) */
+  .end-6,
+  .end-md-6 {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    display: flex !important;
+    gap: 8px !important;
+    z-index: 50;
+  }
+
+  /* F. LOGO & TEKS (TENGAH & LEBIH KE BAWAH) */
+  .header-top {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    box-sizing: border-box !important;
+
+    /* MARGIN TOP DIKURANGI AGAR TIDAK TERLALU JAUH DARI ATAS */
+    margin-top: 55px !important;
+
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .logo-img {
+    display: block;
+    max-width: 100px;
+    height: auto;
+    margin: 0 auto 5px auto;
+  }
+
+  /* Styling Teks Dinas (Putih) */
+  .header-top h1,
+  .header-top h2,
+  .header-top p,
+  .header-top span,
+  .header-top div {
+    color: #ffffff !important;
+    text-align: center;
+    line-height: 1.2;
+    margin: 0;
+    font-size: 14px;
+    background: transparent !important;
+    width: 100%;
+  }
+
+  /* Garis Tipis di Bawah */
+  .header-top::after {
+    content: "";
+    display: block;
+    width: 80%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 15px auto 0 auto;
+  }
+
+  /* G. HAMBURGER MENU (POJOK KANAN BAWAH) */
+  .hamburger-btn {
+    display: block;
+    position: absolute !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    top: auto !important;
+    left: auto !important;
+    color: #ffffff !important;
+    font-size: 1.5rem;
+    z-index: 60;
+  }
+
+  /* H. SEMBUNYIKAN MENU DESKTOP */
+  .navbar-wrapper > div.d-flex,
+  .navbar-menu-link,
+  .navbar-menu-item {
     display: none !important;
   }
 }

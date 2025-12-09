@@ -1,18 +1,46 @@
-.px-10 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* ================= 1. GLOBAL RESET & BODY (AREA LUAR) ================= */
+body {
+  /* Warna ABU-ABU untuk background luar (margin) */
+  background-color: #e8eaed !important;
+
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden; /* Mencegah scroll horizontal tidak sengaja */
 }
-.py-10 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+
+/* ================= 2. KONTAINER UTAMA (KONTEN PUTIH) ================= */
+/* Class ini yang dipanggil di <div className="app-layout"> */
+.app-layout {
+  background-color: #ffffff; /* Warna PUTIH untuk area konten website */
+  position: relative;
+  overflow: hidden; /* Agar sudut melengkung memotong konten di dalamnya */
+
+  /* --- SETTINGAN MOBILE (Tampilan HP) --- */
+  /* Di HP, kita buat full layar agar rapi */
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
-@media (min-width: 768px) {
-  .md\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-  .md\:py-10 {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+
+/* ================= 3. MEDIA QUERY (TAMPILAN LAPTOP/PC) ================= */
+/* Efek margin abu-abu hanya aktif di layar lebar (> 1024px) */
+@media (min-width: 1024px) {
+  .app-layout {
+    /* Lebar konten tidak 100%, supaya background body kelihatan */
+    width: 95%;
+    max-width: 1366px; /* Batas maksimal lebar agar tidak terlalu melar */
+
+    /* Posisi Tengah (Margin Atas-Bawah 40px, Kiri-Kanan Auto) */
+    margin: 40px auto;
+
+    /* Pemanis Visual */
+    border-radius: 20px; /* Sudut melengkung */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05); /* Bayangan halus */
+
+    /* Tinggi minimal dikurangi margin agar pas di layar */
+    min-height: calc(100vh - 80px);
   }
 }

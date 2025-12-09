@@ -12,6 +12,10 @@
 }
 
 /* Custom Colors */
+body {
+  background-color: white;
+}
+
 .text-blue-800 {
   color: #1e40af;
 }
@@ -36,15 +40,7 @@
 .bg-green-1 {
   background-color: #2ca29d;
 }
-.bg-green-2 {
-  background-color: #2ca29d;
-}
-.bg-green-4 {
-  background-color: #2ca29d;
-}
-.bg-green-5 {
-  background-color: #2ca29d;
-}
+
 .bg-yellow-1 {
   background-color: #fbbf24;
 }
@@ -52,7 +48,7 @@
 /* Contact Section */
 .contact-footer-section {
   width: 100%;
-  background-color: #f9fafb;
+  background-color: #ffffff;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
@@ -87,6 +83,18 @@
     gap: 2.5rem;
   }
 }
+@media (max-width: 767px) {
+  .contact-item {
+    transform: none !important;
+    width: 100% !important;
+    max-width: 300px;
+  }
+
+  .contact-items-wrapper {
+    align-items: flex-start;
+    padding-left: 0;
+  }
+}
 
 /* Contact Items Column */
 .contact-items-wrapper {
@@ -103,11 +111,15 @@
   background-color: transparent;
   border-radius: 12px;
   text-decoration: none;
+  position: relative;
+  z-index: 100;
+  width: fit-content;
+  transform: translateX(54px);
   transition: transform 0.3s ease;
+  min-width: 250px;
 }
 
 .contact-item:hover {
-  transform: translateY(-2px);
 }
 
 .contact-icon {
@@ -131,7 +143,7 @@
 }
 
 .contact-item-title {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #1e40af;
   margin: 0 0 4px 0;
@@ -143,8 +155,8 @@
 }
 
 .contact-item-subtitle {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: 1rem;
+  color: #1e40af;
   margin: 0;
 }
 
@@ -154,7 +166,7 @@
   gap: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  padding-left: 0;
+  transform: translateX(74px);
   align-items: center;
 }
 
@@ -195,22 +207,23 @@
 }
 
 .address-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #2ca29d;
   margin: 0 0 0.25rem 0;
 }
 
 .address-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #2ca29d;
   margin: 0 0 1.5rem 0;
 }
 
-.address-text {
-  font-size: 0.875rem;
-  color: #6b7280;
+.text-address {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #737373; /* Tailwind gray-800 */
   line-height: 1.6;
   font-style: normal;
   margin-bottom: 1.5rem;
@@ -298,5 +311,23 @@
 @media (min-width: 1440px) {
   .contact-container {
     max-width: 1400px;
+  }
+}
+
+/* Fix posisi ikon sosial media agar sejajar di semua resolusi */
+@media (max-width: 767px) {
+  .social-media-icons {
+    padding-left: 19px !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    justify-content: flex-start !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .social-media-icons {
+    padding-left: 0px;
+    justify-content: flex-start;
   }
 }

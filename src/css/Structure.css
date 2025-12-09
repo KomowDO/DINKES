@@ -1,5 +1,8 @@
+/* --- WARNA & TEMA --- */
 .bg-green-light {
   background-color: #e8f0ef;
+  padding-top: 3rem;
+  min-height: 100vh;
 }
 .bg-green-card-light {
   background-color: #d5eae9;
@@ -18,6 +21,8 @@
   color: #2ca29d;
   font-size: 0.9rem;
 }
+
+/* --- KARTU ANGGOTA (MEMBER CARD) --- */
 .member-card {
   width: 100%;
   min-height: 130px;
@@ -37,6 +42,8 @@
   object-fit: cover;
   border-radius: 6px;
 }
+
+/* --- SCROLLBAR --- */
 .custom-scrollbar {
   height: 750px;
   overflow-y: auto;
@@ -53,89 +60,92 @@
   border-radius: 3px;
 }
 
+/* --- LAYOUT BANNER (DESKTOP) --- */
 .image-text-container {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-
-  /* 1. Diubah ke flex-start agar teks menempel di kiri */
-  align-items: flex-start;
-  text-align: left;
-  height: 750px;
+  justify-content: flex-end; /* Gambar didorong ke bawah */
+  align-items: center;
+  height: 750px; /* Samakan tinggi dengan list */
+  overflow: hidden;
 }
+
+/* Teks Besar (Background) */
 .image-text-container .overlay-text {
   position: absolute;
-  top: 30%;
-  left: 1.5rem;
-  transform: translateY(-50%);
-  font-size: 7rem;
+  top: 50px;
+  left: 20px;
+  transform: none;
+
+  font-size: 6rem;
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1;
   text-align: left;
   white-space: pre-line;
+
+  /* Teks Transparan dengan Outline */
   color: transparent;
-  -webkit-text-stroke: 2px #a7d9d5;
+  -webkit-text-stroke: 2px #d1e7e5;
+
+  /* DI BELAKANG GAMBAR */
   z-index: 1;
   pointer-events: none;
 }
+
+/* Gambar Jam */
 .image-text-container img {
   max-width: 100%;
   height: auto;
-  max-height: 570px;
+  max-height: 550px;
+
   position: relative;
+
+  /* DI DEPAN TEKS */
   z-index: 2;
-  align-self: center;
+
+  align-self: flex-end; /* Tempel Kanan Container */
+
+  /* GESER KE KANAN 110px (Settingan Desktop Anda) */
+  transform: translateX(110px);
+
+  margin-bottom: -40px;
 }
+
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+
+/* Tampilan Tablet & Mobile (Max Width 992px) */
 @media (max-width: 992px) {
   .row {
     flex-direction: column;
   }
-  .image-text-container {
-    height: auto;
-    margin-bottom: 40px;
-    align-items: flex-start;
+
+  /* FITUR KUNCI: Sembunyikan banner jam di mobile */
+  /* Agar user langsung melihat daftar nama */
+  .col-left {
+    display: none !important;
   }
-  .image-text-container .overlay-text {
-    font-size: 4rem;
-    top: 20%;
-    text-align: left;
-    left: 1.5rem;
-    transform: translateY(-50%);
-  }
-  .image-text-container img {
-    margin-left: 0;
-    max-height: 300px;
-    align-self: center;
-  }
+
+  /* Reset scrollbar list agar memanjang natural ke bawah */
   .custom-scrollbar {
     height: auto;
-    max-height: 500px;
+    max-height: none;
+    overflow-y: visible;
   }
 }
+
+/* Tampilan HP Kecil (Max Width 576px) */
 @media (max-width: 576px) {
-  .image-text-container .overlay-text {
-    font-size: 2.5rem;
-    top: 18%;
-    left: 1rem;
-  }
-  .image-text-container img {
-    max-height: 200px;
-  }
+  /* Penyesuaian ukuran font & gambar kartu agar muat di layar kecil */
   .member-img {
     width: 70px;
     height: 80px;
   }
-  .text-blue-title {
+  .text-green-title {
     font-size: 0.9rem;
   }
-  .text-blue-jabatan {
+  .text-green-jabatan {
     font-size: 0.8rem;
-  }
-}
-@media (max-width: 992px) {
-  .col-left {
-    display: none !important;
   }
 }

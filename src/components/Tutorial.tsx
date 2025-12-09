@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { PlayCircle, AlertCircle } from "lucide-react";
+import {
+  PlayCircle,
+  AlertCircle,
+  Monitor,
+  Smartphone,
+  BookOpen,
+} from "lucide-react";
 import "../css/Tutorial.css";
 
 // ================= INTERFACES =================
@@ -7,15 +13,129 @@ import "../css/Tutorial.css";
 interface ApiVideoItem {
   id: number;
   title: string;
-  url: string; // Format URL Embed: https://www.youtube.com/embed/ID_VIDEO
+  category: "Umum" | "Versi Web" | "Versi Mobile";
+  url: string;
 }
 
-interface ApiResponse {
-  status: string;
-  data: ApiVideoItem[];
-}
+type EducationLevel = "SD" | "SMP";
 
-// ================= HELPER FUNCTIONS =================
+// ================= DATA =================
+
+const DATA_SMP: ApiVideoItem[] = [
+  {
+    id: 101,
+    title: "Tutorial Pendaftaran Pra SPMB SMP (Dapatkan PIN)",
+    category: "Umum",
+    url: "https://www.youtube.com/embed/kvnNKF3_HyE",
+  },
+  {
+    id: 102,
+    title: "Jalur Afirmasi [Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/4XPCca0MOPU",
+  },
+  {
+    id: 103,
+    title: "Jalur Domisili [Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/1E5Eq_cZ9I8",
+  },
+  {
+    id: 104,
+    title: "Jalur Prestasi Nilai Rapor [Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/AGxtjmgufEg",
+  },
+  {
+    id: 105,
+    title: "Jalur Prestasi Hasil Lomba [Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/ZNvr1yFLURQ",
+  },
+  {
+    id: 106,
+    title: "Daftar Ulang [Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/V85bJKb6QZk",
+  },
+  {
+    id: 107,
+    title: "Jalur Afirmasi [Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/5pdjm3VwcO8",
+  },
+  {
+    id: 108,
+    title: "Jalur Domisili [Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/J-mqWoenbMI",
+  },
+  {
+    id: 109,
+    title: "Jalur Prestasi Nilai Rapor [Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/prBx4guk-0Y",
+  },
+  {
+    id: 110,
+    title: "Daftar Ulang [Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/tXK-KP6mTE0",
+  },
+];
+
+const DATA_SD: ApiVideoItem[] = [
+  {
+    id: 201,
+    title: "Tutorial Pendaftaran Pra SPMB SD (Dapatkan PIN)",
+    category: "Umum",
+    url: "https://www.youtube.com/embed/2sRo79MFxSQ",
+  },
+  {
+    id: 202,
+    title: "Jalur Afirmasi [SD - Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/A3qIgXbGSzM",
+  },
+  {
+    id: 203,
+    title: "Jalur Zonasi / Domisili [SD - Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/973wsGbEQTI",
+  },
+  {
+    id: 204,
+    title: "Jalur Perpindahan Tugas [SD - Versi Web]",
+    category: "Versi Web",
+    url: "https://www.youtube.com/embed/IVYJABUOYz4",
+  },
+  {
+    id: 205,
+    title: "Jalur Afirmasi [SD - Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/A3qIgXbGSzM",
+  },
+  {
+    id: 206,
+    title: "Jalur Domisili Lingkungan [SD - Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/973wsGbEQTI",
+  },
+  {
+    id: 207,
+    title: "Jalur Domisili Umum [SD - Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/IVYJABUOYz4",
+  },
+  {
+    id: 208,
+    title: "Daftar Ulang [SD - Versi Mobile]",
+    category: "Versi Mobile",
+    url: "https://www.youtube.com/embed/sFqlAXxB12Q",
+  },
+];
+
+// ================= HELPERS =================
 
 const getYoutubeThumbnail = (url: string) => {
   try {
@@ -27,105 +147,61 @@ const getYoutubeThumbnail = (url: string) => {
   }
 };
 
+const getCategoryIcon = (category: string) => {
+  if (category === "Versi Mobile")
+    return <Smartphone size={14} className="me-1" />;
+  if (category === "Versi Web") return <Monitor size={14} className="me-1" />;
+  return <BookOpen size={14} className="me-1" />;
+};
+
 // ================= COMPONENT UTAMA =================
 
 export default function Tutorial() {
-  // --- STATE ---
+  const [activeTab, setActiveTab] = useState<EducationLevel>("SMP");
   const [videoList, setVideoList] = useState<ApiVideoItem[]>([]);
   const [currentVideo, setCurrentVideo] = useState<ApiVideoItem | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // --- FETCH DATA ---
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        setIsLoading(true);
-        setError(null); // Reset error sebelum fetch ulang
+    const loadData = () => {
+      setIsLoading(true);
+      setError(null);
+      setVideoList([]);
 
-        // Pastikan endpoint ini benar
-        const response = await fetch(
-          "http://localhost:8080/api/video-tutorial"
-        );
-
-        if (!response.ok) {
-          throw new Error(`Gagal memuat data (Status: ${response.status})`);
+      setTimeout(() => {
+        try {
+          const newData = activeTab === "SMP" ? DATA_SMP : DATA_SD;
+          setVideoList(newData);
+          if (newData.length > 0) {
+            setCurrentVideo(newData[0]);
+          }
+          setIsLoading(false);
+        } catch (err) {
+          console.error("Gagal memuat data tutorial:", err);
+          setError("Terjadi kesalahan saat memuat data.");
+          setIsLoading(false);
         }
-
-        const result = (await response.json()) as ApiResponse;
-
-        if (
-          result.data &&
-          Array.isArray(result.data) &&
-          result.data.length > 0
-        ) {
-          setVideoList(result.data);
-          setCurrentVideo(result.data[0]);
-        } else {
-          throw new Error("Tidak ada video tutorial yang ditemukan.");
-        }
-      } catch (err) {
-        console.error("Error fetching videos:", err);
-        if (err instanceof Error) {
-          // Jika error karena koneksi (backend mati), pesannya biasanya "Failed to fetch"
-          setError(
-            err.message === "Failed to fetch"
-              ? "Tidak dapat terhubung ke server (Backend Mati/CORS)."
-              : err.message
-          );
-        } else {
-          setError("Terjadi kesalahan yang tidak diketahui.");
-        }
-      } finally {
-        setIsLoading(false);
-      }
+      }, 600);
     };
 
-    fetchVideos();
-  }, []);
+    loadData();
+  }, [activeTab]);
 
-  // ================= RENDER STATES =================
-
-  // 1. Tampilan Loading
-  if (isLoading) {
-    return (
-      <section
-        className="tutorial-section py-5 text-center"
-        style={{
-          minHeight: "400px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div>
-          <div className="spinner-border text-primary mb-3" role="status"></div>
-          <p className="text-muted">Sedang memuat video...</p>
-        </div>
-      </section>
-    );
-  }
-
-  // 2. Tampilan ERROR (PERBAIKAN DI SINI AGAR TIDAK HILANG)
   if (error) {
     return (
       <section className="tutorial-section py-5">
         <div className="container">
           <div
-            className="alert alert-danger d-flex align-items-center shadow-sm rounded-3"
+            className="alert alert-danger d-flex align-items-center"
             role="alert"
           >
             <AlertCircle className="me-3" size={24} />
             <div>
               <h4 className="alert-heading fs-5 fw-bold mb-1">
-                Gagal Memuat Video
+                Gagal Memuat Data
               </h4>
               <p className="mb-0 small">{error}</p>
-              <hr />
-              <p className="mb-0 small fst-italic">
-                Tips: Pastikan backend <code>http://localhost:8080</code> sudah
-                berjalan.
-              </p>
             </div>
           </div>
         </div>
@@ -133,12 +209,6 @@ export default function Tutorial() {
     );
   }
 
-  // 3. Tampilan Jika Data Kosong (tapi tidak error)
-  if (!currentVideo) {
-    return null;
-  }
-
-  // ================= RENDER UTAMA (SUCCESS) =================
   return (
     <section
       className="tutorial-section"
@@ -149,69 +219,145 @@ export default function Tutorial() {
       }}
     >
       <div className="container">
-        {/* Header */}
+        {/* HEADER & TABS */}
         <div className="text-center mb-4">
-          <h2 className="fw-bold text-blue">Tutorial Penggunaan</h2>
-          <p className="text-muted">Panduan visual penggunaan aplikasi</p>
-        </div>
+          <h2 className="fw-bold text-blue mb-3">Tutorial Penggunaan</h2>
 
-        {/* Main Player */}
-        <div className="row justify-content-center mb-4">
-          <div className="col-lg-10 col-xl-9">
-            <div className="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden bg-black">
-              <iframe
-                src={currentVideo.url}
-                title={currentVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ border: 0 }}
-              ></iframe>
-            </div>
-            <h4 className="mt-3 fw-bold text-dark">{currentVideo.title}</h4>
+          <div className="d-inline-flex bg-white rounded-pill shadow-sm p-1 border">
+            <button
+              className={`btn btn-sm rounded-pill px-4 fw-bold transition-all ${
+                activeTab === "SD"
+                  ? "btn-primary"
+                  : "btn-light text-muted bg-transparent"
+              }`}
+              onClick={() => setActiveTab("SD")}
+              style={{ minWidth: "120px" }}
+            >
+              SD
+            </button>
+            <button
+              className={`btn btn-sm rounded-pill px-4 fw-bold transition-all ${
+                activeTab === "SMP"
+                  ? "btn-primary"
+                  : "btn-light text-muted bg-transparent"
+              }`}
+              onClick={() => setActiveTab("SMP")}
+              style={{ minWidth: "120px" }}
+            >
+              SMP
+            </button>
           </div>
+
+          <p className="text-muted mt-3 small">
+            Menampilkan panduan untuk jenjang{" "}
+            <span className="fw-bold text-dark">{activeTab}</span>
+          </p>
         </div>
 
-        {/* Playlist / Slider */}
-        <div className="row justify-content-center">
-          <div className="col-lg-10 col-xl-9">
-            <div className="playlist-container">
-              <p className="fw-bold text-secondary mb-2 small text-uppercase ls-1">
-                Daftar Video ({videoList.length})
-              </p>
+        {/* LOADING STATE */}
+        {isLoading ? (
+          <div className="text-center py-5" style={{ minHeight: "400px" }}>
+            <div className="spinner-border text-primary" role="status"></div>
+            <p className="mt-2 text-muted">Memuat video {activeTab}...</p>
+          </div>
+        ) : (
+          currentVideo && (
+            <>
+              {/* MAIN VIDEO PLAYER */}
+              <div className="row justify-content-center mb-5">
+                <div className="col-lg-10 col-xl-9">
+                  <div className="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden bg-black">
+                    <iframe
+                      src={currentVideo.url}
+                      title={currentVideo.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{ border: 0 }}
+                    ></iframe>
+                  </div>
+                  <div className="d-flex align-items-center mt-3 gap-2 flex-wrap">
+                    <span
+                      className={`badge d-flex align-items-center ${
+                        currentVideo.category === "Versi Mobile"
+                          ? "bg-success"
+                          : currentVideo.category === "Versi Web"
+                            ? "bg-primary"
+                            : "bg-secondary"
+                      }`}
+                    >
+                      {getCategoryIcon(currentVideo.category)}
+                      {currentVideo.category}
+                    </span>
+                    <h4 className="fw-bold text-dark mb-0">
+                      {currentVideo.title}
+                    </h4>
+                  </div>
+                </div>
+              </div>
 
-              <div className="d-flex gap-3 overflow-auto pb-3 px-1 playlist-scroll">
-                {videoList.map((video) => (
-                  <div
-                    key={video.id}
-                    className={`playlist-item card border-0 shadow-sm flex-shrink-0 ${
-                      currentVideo.id === video.id ? "active-video" : ""
-                    }`}
-                    onClick={() => setCurrentVideo(video)}
-                  >
-                    <div className="position-relative wrapper-img">
-                      <img
-                        src={getYoutubeThumbnail(video.url)}
-                        alt={video.title}
-                        className="card-img-top object-fit-cover"
-                      />
-                      <div className="play-overlay d-flex align-items-center justify-content-center">
-                        <PlayCircle size={32} className="text-white" />
-                      </div>
-                    </div>
-                    <div className="card-body p-2 bg-white">
-                      <p
-                        className="card-text small fw-semibold text-dark text-truncate-2 mb-0"
-                        title={video.title}
-                      >
-                        {video.title}
-                      </p>
+              {/* PLAYLIST SLIDER (SWIPE / GESER) */}
+              <div className="row justify-content-center">
+                <div className="col-lg-11 col-xl-10">
+                  <div className="playlist-container">
+                    <p className="fw-bold text-secondary mb-2 small text-uppercase ls-1 ms-1">
+                      Daftar Video {activeTab} ({videoList.length})
+                    </p>
+
+                    {/* CONTAINER SCROLL (MENGGUNAKAN CLASS 'playlist-scroll' YANG SUDAH DI-FIX) */}
+                    <div className="playlist-scroll">
+                      {videoList.map((video) => (
+                        <div
+                          key={video.id}
+                          className={`playlist-item shadow-sm ${
+                            currentVideo.id === video.id ? "active-video" : ""
+                          }`}
+                          onClick={() => setCurrentVideo(video)}
+                        >
+                          {/* Gambar Thumbnail */}
+                          <div className="wrapper-img">
+                            <img
+                              src={getYoutubeThumbnail(video.url)}
+                              alt={video.title}
+                            />
+
+                            {/* Badge Kategori */}
+                            <span
+                              className="position-absolute top-0 end-0 badge bg-dark m-2 bg-opacity-75 rounded-1"
+                              style={{ fontSize: "0.65rem" }}
+                            >
+                              {video.category === "Versi Mobile"
+                                ? "HP"
+                                : video.category === "Versi Web"
+                                  ? "WEB"
+                                  : "UMUM"}
+                            </span>
+
+                            {/* Overlay Play Icon */}
+                            <div className="play-overlay">
+                              {currentVideo.id === video.id && (
+                                <PlayCircle size={32} className="text-white" />
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Judul Video */}
+                          <div className="card-body p-2">
+                            <p
+                              className="card-text small fw-semibold text-dark text-truncate-2 mb-0"
+                              title={video.title}
+                            >
+                              {video.title}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </>
+          )
+        )}
       </div>
     </section>
   );

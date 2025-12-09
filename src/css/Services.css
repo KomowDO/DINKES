@@ -1,146 +1,115 @@
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
+/* =========================================
+   CONTAINER UTAMA (WRAPPER)
+   ========================================= */
+.services-scroll-wrapper {
+  display: flex;
+  gap: 1.5rem; /* Jarak antar item */
+  width: 100%;
+  padding: 15px 5px;
 
-.bg-gray-50 {
-  background-color: #f9fafb;
-}
-
-.container-fluid {
-  max-width: 100%;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-/* Row dan Col */
-
-.g-4 {
-  gap: 1rem;
-}
-
-.justify-content-center {
+  /* DESKTOP: Grid (Turun ke bawah) */
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-.d-flex {
+/* =========================================
+   LOGIKA MOBILE (SLIDER KESAMPING)
+   ========================================= */
+@media (max-width: 992px) {
+  .services-scroll-wrapper {
+    /* Paksa satu baris lurus */
+    flex-wrap: nowrap !important;
+    justify-content: flex-start;
+
+    /* Scroll Samping */
+    overflow-x: auto;
+
+    /* Padding agar tidak mepet layar */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    /* Efek Snap */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Sembunyikan Scrollbar */
+  .services-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* =========================================
+   ITEM WRAPPER
+   ========================================= */
+.service-item-wrapper {
+  /* Di Mobile: Cegah ukuran mengecil */
+  @media (max-width: 992px) {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+}
+
+/* =========================================
+   STYLE BARU: BOX TERPISAH DARI TEKS
+   ========================================= */
+
+/* 1. Link Pembungkus (Membungkus Box + Teks) */
+.service-link {
+  text-decoration: none;
   display: flex;
+  flex-direction: column; /* Susun Atas-Bawah */
+  align-items: center; /* Tengahkan horizontal */
+  width: 14rem; /* Lebar area klik */
 }
 
-.col {
-  flex: 1;
-}
+/* 2. Kotak Gambar (Hanya Gambar) */
+.service-icon-box {
+  /* Warna Background Hijau Mint/Cyan (Sesuai Gambar) */
+  background-color: #dbece9;
 
-/* Card Styling */
-.service-card {
-  background-color: #ededed;
-  border-radius: 0.5rem;
-  box-shadow:
-    0 1px 3px 0 rgba(0, 0, 0, 0.1),
-    0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
-  width: 14.375rem;
-  height: 7.938rem;
-  transition: all 0.3s ease;
+  border-radius: 20px; /* Sudut membulat */
+  width: 100%; /* Mengikuti lebar parent (14rem) */
+  height: 8rem; /* Tinggi kotak */
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
-.service-card-link {
-  text-decoration: none;
-}
-
-.w-48 {
-  width: 12rem;
-}
-
-.h-28 {
-  height: 7rem;
-}
-
-.max-h-16 {
-  max-height: 4rem;
-}
-
-.object-contain {
+/* Gambar Logo di Dalam Kotak */
+.service-icon-box img {
+  height: 3.5rem; /* Ukuran Logo */
+  width: auto;
   object-fit: contain;
 }
 
-.text-center {
+/* 3. Teks Judul (Di Bawah Kotak) */
+.service-title {
+  margin-top: 1rem; /* Jarak antara kotak dan teks */
+  color: #000000; /* Hitam Pekat */
+  font-weight: 700; /* Bold */
+  font-size: 0.9rem;
   text-align: center;
+  line-height: 1.3;
+
+  /* Agar teks panjang turun ke bawah dengan rapi */
+  max-width: 90%;
 }
 
-.mt-4 {
-  margin-top: 1rem;
+/* =========================================
+   HOVER EFFECTS
+   ========================================= */
+.service-link:hover .service-icon-box {
+  transform: scale(1.03); /* Kotak membesar sedikit */
+  background-color: #d0e4e1; /* Warna sedikit menggelap */
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
-.text-gray-900 {
-  color: #111827;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-md-base {
-  font-size: 1rem;
-}
-
-/* Hover Effects */
-.service-hover-effect:hover {
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-  transform: scale(1.05);
-}
-
-.service-title-hover:hover {
-  color: #2563eb; /* text-blue-700 */
-}
-
-/* Focus Ring */
-.focus-outline-none:focus {
-  outline: none;
-}
-
-.focus-ring-4:focus {
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.5); /* focus:ring-blue-400 */
-}
-
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-
-/* Spacing */
-.mt-15 {
-  margin-top: 3.75rem;
-}
-
-/* Responsive */
-@media (min-width: 768px) {
-  .text-md-base {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .text-md-base {
-    font-size: 1rem;
-  }
+.service-link:hover .service-title {
+  color: #00796b; /* Teks berubah warna saat hover (Opsional) */
 }

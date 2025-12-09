@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../css/Navbar.css";
-// import api from "../services/api";
 
 // --- INTERFACES ---
 interface Menu {
@@ -13,7 +14,7 @@ interface Menu {
   children?: Menu[];
 }
 
-// --- DATA DUMMY (7 MENU SESUAI GAMBAR) ---
+// --- DATA DUMMY ---
 const DUMMY_MENUS: Menu[] = [
   {
     id_menu: 1,
@@ -54,7 +55,7 @@ const DUMMY_MENUS: Menu[] = [
     menu_url: "/berita",
     status: "active",
     order_number: 2,
-    sub_menu: [], // Tidak ada panah
+    sub_menu: [],
   },
   {
     id_menu: 3,
@@ -104,7 +105,7 @@ const DUMMY_MENUS: Menu[] = [
       },
       {
         id_menu: 45,
-        menu_name: "Pengadaan Barang / Jasa dan Kerjasama SKPD",
+        menu_name: "Pengadaan Barang / Jasa",
         menu_url: "/pengadaan",
         status: "active",
       },
@@ -177,7 +178,7 @@ const DUMMY_MENUS: Menu[] = [
     menu_url: "/kontak",
     status: "active",
     order_number: 7,
-    sub_menu: [], // Tidak ada panah
+    sub_menu: [],
   },
 ];
 
@@ -185,43 +186,32 @@ function Navbar() {
   const [menus, setMenus] = useState<Menu[]>([]);
 
   useEffect(() => {
-    // --- LOAD DATA ---
     const loadData = () => {
-      // 1. Fungsi Mapping Rekursif (sub_menu -> children)
       const mapMenuChildren = (items: Menu[]): Menu[] => {
         return items.map((item) => ({
           ...item,
           children: item.sub_menu ? mapMenuChildren(item.sub_menu) : [],
         }));
       };
-
-      // 2. Map Data Dummy
       const processedMenus = mapMenuChildren(DUMMY_MENUS);
-
-      // 3. Sorting berdasarkan order_number
       processedMenus.sort(
         (a, b) => (a.order_number || 99) - (b.order_number || 99)
       );
-
       setMenus(processedMenus);
     };
-
     loadData();
   }, []);
 
-  // --- RENDER MENU ---
   const renderMenus = (menuList: Menu[], depth = 0) => {
     if (!Array.isArray(menuList) || menuList.length === 0) return null;
 
     return menuList.map((menu) => {
       const hasChildren = menu.children && menu.children.length > 0;
-
       return (
         <div
           key={menu.id_menu}
           className="navbar-menu-item position-relative d-inline-block"
         >
-          {/* LINK UTAMA */}
           <a
             href={menu.menu_url || "#"}
             className={`
@@ -231,8 +221,6 @@ function Navbar() {
             style={{ whiteSpace: "nowrap" }}
           >
             {menu.menu_name}
-
-            {/* Logic Panah (Chevron) */}
             {hasChildren && depth === 0 && (
               <i
                 className="bi bi-chevron-down ms-1"
@@ -246,13 +234,10 @@ function Navbar() {
               ></i>
             )}
           </a>
-
-          {/* DROPDOWN SUBMENU */}
           {hasChildren && (
             <div
               className={`
-                position-absolute bg-white shadow-md rounded-md z-index-99 min-width-200px
-                submenu-hidden
+                position-absolute bg-white shadow-md rounded-md z-index-99 min-width-200px submenu-hidden
                 ${depth === 0 ? "top-100 start-0 mt-1" : "top-0 start-100 ms-1"}
               `}
             >
@@ -267,37 +252,61 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r-teal-custom text-white rounded-top-4 shadow-md overflow-visible position-relative z-3">
+    <nav
+      className="d-flex flex-column shadow-md position-relative z-3"
+      style={{
+        width: "100%",
+        // --- PERBAIKAN DI SINI ---
+        marginTop: "0", // Ubah dari "30px" ke "0" agar nempel ke atas
+        padding: "0",
+
+        background: "linear-gradient(90deg, #2ca29d 0%, #12726d 100%)",
+
+        // --- PERBAIKAN RADIUS ---
+        // Ubah dari "61px" ke "20px" agar PAS dengan sudut container (App.css)
+        borderTopLeftRadius: "20px",
+        borderTopRightRadius: "20px",
+
+        // Tetap pakai border fix untuk anti-aliasing
+        border: "1px solid #2ca29d",
+        boxSizing: "border-box",
+        outline: "none",
+        overflow: "hidden", // Tambahan agar konten anak tidak "bocor" keluar radius
+      }}
+    >
       {/* HEADER ATAS */}
-      <div className="d-flex align-items-center position-relative px-4 px-md-5 px-lg-6 px-xl-6 px-xxl-6 py-6 h-10">
+      <div
+        className="d-flex align-items-center position-relative px-4 px-md-5 py-6 w-100"
+        style={{ minHeight: "130px" }}
+      >
         {/* Social Icons */}
-        <div className="d-none d-md-flex gap-3 position-absolute top-6 start-6 start-md-6 start-lg-6 start-xl-6 start-xxl-6">
+        <div className="d-none d-md-flex gap-3 position-absolute top-6 start-6 start-md-6">
           {["youtube", "facebook", "instagram", "twitter"].map((icon) => (
             <a
               key={icon}
               href="#"
               className="w-7 h-7 cursor-pointer text-green-1 bg-white rounded-circle hover-scale-110 transition-transform d-flex align-items-center justify-content-center text-decoration-none"
+              style={{ width: "1.75rem", height: "1.75rem" }}
             >
               <i className={`bi bi-${icon} fs-6`}></i>
             </a>
           ))}
         </div>
 
-        {/* Logo */}
-        <div className="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+        {/* Logo & Judul */}
+        <div className="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center w-100 header-top">
           <img
-            src="/assets/logo.png"
+            src="/assets/logo-kota-tangerang.png"
             alt="Logo"
-            className="w-24 mb-3 mt-7"
-            style={{ width: "6rem" }}
+            className="logo-img mb-3 mt-7"
           />
-          <h1 className="font-bold text-lg leading-snug text-center tracking-wide m-0">
+          <h1 className="font-bold text-lg leading-snug tracking-wide m-0 text-white">
             DINAS KESEHATAN <br /> KOTA TANGERANG
           </h1>
         </div>
 
-        {/* Flag Icons */}
-        <div className="d-flex gap-2 position-absolute top-6 end-6 end-md-6 end-lg-6 end-xl-6 end-xxl-6">
+        {/* Bendera */}
+        <div className="d-flex gap-2 position-absolute top-6 end-6 end-md-6">
           <img
             src="/assets/indo2.png"
             alt="ID"
@@ -313,12 +322,20 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="border-top border-white opacity-25"></div>
+      {/* SEPARATOR (Garis Putih Tipis) - Bisa dihapus jika dianggap "masalah" */}
+      <div
+        className="w-100 bg-white"
+        style={{
+          height: "1px",
+          opacity: "0.7",
+          margin: 0,
+          padding: 0,
+        }}
+      ></div>
 
-      {/* MENU WRAPPER */}
+      {/* MENU NAVIGASI */}
       <div className="w-100 navbar-wrapper">
-        {/* === CLASS 'gap-custom' DITAMBAHKAN DI SINI === */}
-        <div className="d-flex justify-content-center gap-custom min-width-max px-3 px-md-5 px-lg-5 px-xl-5 px-xxl-5 py-3 font-semibold text-md">
+        <div className="d-flex justify-content-center gap-custom min-width-max px-3 px-md-5 py-3 font-semibold text-md text-white">
           {renderMenus(menus)}
         </div>
       </div>

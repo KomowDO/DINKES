@@ -1,6 +1,6 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import "../css/services.css";
-import { Container, Row, Col } from "react-bootstrap";
 
 interface ServiceItem {
   id: number;
@@ -42,67 +42,35 @@ const services: ServiceItem[] = [
   },
 ];
 
-const ServiceGrid: React.FC<{ service: ServiceItem }> = ({ service }) => {
-  const cardStyle: React.CSSProperties = {
-    height: "127px",
-    width: "231px",
-    borderRadius: "20px",
-    backgroundColor: "#EDEDED",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
+const ServiceCard: React.FC<{ service: ServiceItem }> = ({ service }) => {
   return (
-    <div className="text-center">
-      <a
-        href={service.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-decoration-none text-dark d-flex flex-column align-items-center"
-      >
-        <div style={cardStyle} className=" mb-2">
-          {service.image && (
-            <img
-              src={service.image}
-              alt={service.title}
-              className="img-fluid"
-              style={{
-                maxWidth: "100px",
-                maxHeight: "100px",
-                objectFit: "contain",
-              }}
-            />
-          )}
-        </div>
-        <h6
-          className="fw-bold text-center"
-          style={{
-            fontSize: "0.9rem",
-            lineHeight: "1.2",
-            maxWidth: "140px",
-          }}
-        >
-          {service.title}
-        </h6>
-      </a>
-    </div>
+    <a
+      href={service.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="service-link" // Class pembungkus utama
+    >
+      {/* BAGIAN 1: KOTAK (Hanya berisi gambar) */}
+      <div className="service-icon-box">
+        <img src={service.image} alt={service.title} />
+      </div>
+
+      {/* BAGIAN 2: TEKS (Di luar kotak, di bawahnya) */}
+      <div className="service-title">{service.title}</div>
+    </a>
   );
 };
 
-// Komponen Utama
 const ServicesSection: React.FC = () => {
   return (
-    <Container className="py-4">
-      {/* Baris Pertama */}
-      <Row className="g-4 mb-4 justify-content-between">
+    <Container className="py-5">
+      <div className="services-scroll-wrapper">
         {services.map((service) => (
-          <Col key={service.id} xs={12} sm={6} md={4} lg={2} xl={2}>
-            <ServiceGrid service={service} />
-          </Col>
+          <div key={service.id} className="service-item-wrapper">
+            <ServiceCard service={service} />
+          </div>
         ))}
-      </Row>
+      </div>
     </Container>
   );
 };

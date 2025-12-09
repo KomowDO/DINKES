@@ -1,0 +1,196 @@
+/* --- VARIABLES --- */
+:root {
+  --footer-bg: #39847e;
+  --footer-text: #ffffff;
+  --footer-text-muted: #e0f2f1;
+}
+
+/* --- CONTAINER UTAMA --- */
+.footer-section {
+  width: 100%;
+  position: relative;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--footer-text);
+  margin-top: 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- 1. ILUSTRASI KOTA (LAYER PALING BAWAH) --- */
+.footer-illustration-wrapper {
+  width: 100%;
+  line-height: 0;
+  font-size: 0;
+  background-color: transparent;
+  position: relative;
+
+  /* Menarik gambar ke atas agar masuk ke area section contact */
+  margin-top: -200px;
+
+  /* PENTING: z-index 1 (Paling Kecil) */
+  /* Agar gambar ini berada DI BELAKANG icon contact */
+  z-index: 1;
+
+  pointer-events: none;
+  margin-bottom: -1px;
+}
+
+.footer-city-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- 2. KONTEN UTAMA HIJAU (LAYER TENGAH) --- */
+.footer-content {
+  background-color: var(--footer-bg);
+  padding: 3rem 0 2rem;
+
+  /* Sudut melengkung di bawah */
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+
+  position: relative;
+
+  /* PENTING: z-index 10 (Sedang) */
+  /* Lebih tinggi dari gambar (1), tapi lebih rendah dari contact (50) */
+  /* Fungsinya agar kotak hijau ini menutupi potongan bawah gambar kota */
+  z-index: 10;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* --- TYPOGRAPHY --- */
+.label-small {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-bottom: 0;
+}
+
+.brand-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.footer-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #e6fffa;
+}
+
+/* --- KOLOM 1: ALAMAT & BADGE --- */
+.address-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--footer-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.kominfo-badge {
+  width: 180px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- KOLOM 2: SOSIAL MEDIA LIST --- */
+.channel-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.channel-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.channel-list li i {
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+.channel-list a {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.channel-list a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* --- KOLOM 3: PENGUNJUNG --- */
+.stats-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.stats-list li {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+}
+
+.stat-label {
+  opacity: 0.9;
+}
+
+.stat-value {
+  font-weight: 600;
+}
+
+/* --- COPYRIGHT --- */
+.footer-copyright {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .footer-row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-content {
+    border-radius: 0;
+  }
+
+  .footer-illustration-wrapper {
+    margin-top: -50px; /* Sesuaikan jarak di HP */
+  }
+}
