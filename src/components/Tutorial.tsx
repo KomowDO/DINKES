@@ -5,6 +5,7 @@ import {
   Monitor,
   Smartphone,
   BookOpen,
+  RefreshCw,
 } from "lucide-react";
 import "../css/Tutorial.css";
 
@@ -19,131 +20,48 @@ interface ApiVideoItem {
 
 type EducationLevel = "SD" | "SMP";
 
-// ================= DATA =================
-
-const DATA_SMP: ApiVideoItem[] = [
-  {
-    id: 101,
-    title: "Tutorial Pendaftaran Pra SPMB SMP (Dapatkan PIN)",
-    category: "Umum",
-    url: "https://www.youtube.com/embed/kvnNKF3_HyE",
-  },
-  {
-    id: 102,
-    title: "Jalur Afirmasi [Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/4XPCca0MOPU",
-  },
-  {
-    id: 103,
-    title: "Jalur Domisili [Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/1E5Eq_cZ9I8",
-  },
-  {
-    id: 104,
-    title: "Jalur Prestasi Nilai Rapor [Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/AGxtjmgufEg",
-  },
-  {
-    id: 105,
-    title: "Jalur Prestasi Hasil Lomba [Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/ZNvr1yFLURQ",
-  },
-  {
-    id: 106,
-    title: "Daftar Ulang [Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/V85bJKb6QZk",
-  },
-  {
-    id: 107,
-    title: "Jalur Afirmasi [Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/5pdjm3VwcO8",
-  },
-  {
-    id: 108,
-    title: "Jalur Domisili [Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/J-mqWoenbMI",
-  },
-  {
-    id: 109,
-    title: "Jalur Prestasi Nilai Rapor [Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/prBx4guk-0Y",
-  },
-  {
-    id: 110,
-    title: "Daftar Ulang [Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/tXK-KP6mTE0",
-  },
-];
-
-const DATA_SD: ApiVideoItem[] = [
-  {
-    id: 201,
-    title: "Tutorial Pendaftaran Pra SPMB SD (Dapatkan PIN)",
-    category: "Umum",
-    url: "https://www.youtube.com/embed/2sRo79MFxSQ",
-  },
-  {
-    id: 202,
-    title: "Jalur Afirmasi [SD - Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/A3qIgXbGSzM",
-  },
-  {
-    id: 203,
-    title: "Jalur Zonasi / Domisili [SD - Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/973wsGbEQTI",
-  },
-  {
-    id: 204,
-    title: "Jalur Perpindahan Tugas [SD - Versi Web]",
-    category: "Versi Web",
-    url: "https://www.youtube.com/embed/IVYJABUOYz4",
-  },
-  {
-    id: 205,
-    title: "Jalur Afirmasi [SD - Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/A3qIgXbGSzM",
-  },
-  {
-    id: 206,
-    title: "Jalur Domisili Lingkungan [SD - Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/973wsGbEQTI",
-  },
-  {
-    id: 207,
-    title: "Jalur Domisili Umum [SD - Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/IVYJABUOYz4",
-  },
-  {
-    id: 208,
-    title: "Daftar Ulang [SD - Versi Mobile]",
-    category: "Versi Mobile",
-    url: "https://www.youtube.com/embed/sFqlAXxB12Q",
-  },
-];
-
 // ================= HELPERS =================
+
+const getEmbedUrl = (url: string) => {
+  if (!url) return "";
+  if (url.includes("/embed/")) return url;
+
+  let videoId = "";
+
+  try {
+    if (url.includes("youtu.be")) {
+      videoId = url.split("/").pop()?.split("?")[0] || "";
+    } else if (url.includes("v=")) {
+      const urlObj = new URL(url);
+      videoId = urlObj.searchParams.get("v") || "";
+    }
+  } catch {
+    // FIX 1: Menghapus (e) agar tidak kena rule 'unused-vars'
+    console.error("Gagal memparsing URL video:", url);
+    return url;
+  }
+
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+};
 
 const getYoutubeThumbnail = (url: string) => {
   try {
-    const parts = url.split("/");
-    const videoId = parts[parts.length - 1].split("?")[0];
+    let videoId = "";
+    if (url.includes("youtu.be")) {
+      videoId = url.split("/").pop()?.split("?")[0] || "";
+    } else if (url.includes("v=")) {
+      const urlObj = new URL(url);
+      videoId = urlObj.searchParams.get("v") || "";
+    } else if (url.includes("/embed/")) {
+      videoId = url.split("/embed/")[1].split("?")[0];
+    }
+
+    if (!videoId)
+      return "https://via.placeholder.com/300x169?text=No+Thumbnail";
+
     return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
   } catch {
-    return "https://via.placeholder.com/300x169?text=No+Thumbnail";
+    return "https://via.placeholder.com/300x169?text=Error";
   }
 };
 
@@ -160,32 +78,78 @@ export default function Tutorial() {
   const [activeTab, setActiveTab] = useState<EducationLevel>("SMP");
   const [videoList, setVideoList] = useState<ApiVideoItem[]>([]);
   const [currentVideo, setCurrentVideo] = useState<ApiVideoItem | null>(null);
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadData = () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchVideos = async () => {
       setIsLoading(true);
       setError(null);
       setVideoList([]);
 
-      setTimeout(() => {
-        try {
-          const newData = activeTab === "SMP" ? DATA_SMP : DATA_SD;
-          setVideoList(newData);
-          if (newData.length > 0) {
-            setCurrentVideo(newData[0]);
-          }
-          setIsLoading(false);
-        } catch (err) {
-          console.error("Gagal memuat data tutorial:", err);
-          setError("Terjadi kesalahan saat memuat data.");
-          setIsLoading(false);
+      try {
+        // GANTI URL INI DENGAN URL BACKEND YANG SESUAI
+        const BASE_API_URL = "https://api.websitekamu.com/tutorials";
+        const endpoint = `${BASE_API_URL}?level=${activeTab}`;
+
+        const response = await fetch(endpoint, {
+          signal,
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Server Error: ${response.status} ${response.statusText}`
+          );
         }
-      }, 600);
+
+        const rawData = await response.json();
+
+        if (!Array.isArray(rawData)) {
+          throw new Error("Format data dari backend bukan Array");
+        }
+
+        // Mapping Data
+        // Menggunakan Record<string, any> untuk menghindari 'Unexpected any'
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const formattedData: ApiVideoItem[] = rawData.map((item: any) => ({
+          id: item.id,
+          title: item.title, // Sesuaikan dengan response backend
+          category: item.category, // Sesuaikan dengan response backend
+          url: item.url, // Sesuaikan dengan response backend
+        }));
+
+        setVideoList(formattedData);
+
+        if (formattedData.length > 0) {
+          setCurrentVideo(formattedData[0]);
+        } else {
+          setCurrentVideo(null);
+        }
+      } catch (err: unknown) {
+        // FIX 2: Menggunakan 'unknown' dan 'instanceof Error'
+        if (err instanceof Error) {
+          if (err.name !== "AbortError") {
+            console.error("Fetch Error:", err);
+            setError(err.message || "Gagal menghubungi server.");
+          }
+        } else {
+          // Fallback jika error bukan standard Error object
+          console.error("Unknown Error:", err);
+          setError("Terjadi kesalahan yang tidak diketahui.");
+        }
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    loadData();
+    fetchVideos();
+
+    return () => controller.abort();
   }, [activeTab]);
 
   if (error) {
@@ -193,15 +157,23 @@ export default function Tutorial() {
       <section className="tutorial-section py-5">
         <div className="container">
           <div
-            className="alert alert-danger d-flex align-items-center"
+            className="alert alert-danger shadow-sm border-0 d-flex align-items-center"
             role="alert"
           >
-            <AlertCircle className="me-3" size={24} />
+            <AlertCircle className="me-3 flex-shrink-0" size={24} />
             <div>
-              <h4 className="alert-heading fs-5 fw-bold mb-1">
+              <h4 className="alert-heading fs-6 fw-bold mb-1">
                 Gagal Memuat Data
               </h4>
-              <p className="mb-0 small">{error}</p>
+              <p className="mb-0 small opacity-75">{error}</p>
+              <button
+                className="btn btn-sm btn-outline-danger mt-2 d-flex align-items-center gap-2"
+                onClick={() =>
+                  setActiveTab((prev) => (prev === "SD" ? "SD" : "SMP"))
+                }
+              >
+                <RefreshCw size={12} /> Coba Lagi
+              </button>
             </div>
           </div>
         </div>
@@ -256,107 +228,119 @@ export default function Tutorial() {
 
         {/* LOADING STATE */}
         {isLoading ? (
-          <div className="text-center py-5" style={{ minHeight: "400px" }}>
+          <div
+            className="text-center py-5 d-flex flex-column align-items-center justify-content-center"
+            style={{ minHeight: "400px" }}
+          >
             <div className="spinner-border text-primary" role="status"></div>
-            <p className="mt-2 text-muted">Memuat video {activeTab}...</p>
+            <p className="mt-3 text-muted small">
+              Sedang mengambil data video...
+            </p>
           </div>
-        ) : (
-          currentVideo && (
-            <>
-              {/* MAIN VIDEO PLAYER */}
-              <div className="row justify-content-center mb-5">
-                <div className="col-lg-10 col-xl-9">
-                  <div className="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden bg-black">
-                    <iframe
-                      src={currentVideo.url}
-                      title={currentVideo.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      style={{ border: 0 }}
-                    ></iframe>
-                  </div>
-                  <div className="d-flex align-items-center mt-3 gap-2 flex-wrap">
-                    <span
-                      className={`badge d-flex align-items-center ${
-                        currentVideo.category === "Versi Mobile"
-                          ? "bg-success"
-                          : currentVideo.category === "Versi Web"
-                            ? "bg-primary"
-                            : "bg-secondary"
-                      }`}
-                    >
-                      {getCategoryIcon(currentVideo.category)}
-                      {currentVideo.category}
-                    </span>
-                    <h4 className="fw-bold text-dark mb-0">
-                      {currentVideo.title}
-                    </h4>
-                  </div>
+        ) : currentVideo ? (
+          <>
+            {/* MAIN VIDEO PLAYER */}
+            <div className="row justify-content-center mb-5">
+              <div className="col-lg-10 col-xl-9">
+                <div className="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden bg-black">
+                  <iframe
+                    src={getEmbedUrl(currentVideo.url)}
+                    title={currentVideo.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ border: 0 }}
+                  ></iframe>
+                </div>
+                <div className="d-flex align-items-center mt-3 gap-2 flex-wrap">
+                  <span
+                    className={`badge d-flex align-items-center py-2 px-3 ${
+                      currentVideo.category === "Versi Mobile"
+                        ? "bg-success"
+                        : currentVideo.category === "Versi Web"
+                          ? "bg-primary"
+                          : "bg-secondary"
+                    }`}
+                  >
+                    {getCategoryIcon(currentVideo.category)}
+                    {currentVideo.category}
+                  </span>
+                  <h4 className="fw-bold text-dark mb-0">
+                    {currentVideo.title}
+                  </h4>
                 </div>
               </div>
+            </div>
 
-              {/* PLAYLIST SLIDER (SWIPE / GESER) */}
-              <div className="row justify-content-center">
-                <div className="col-lg-11 col-xl-10">
-                  <div className="playlist-container">
-                    <p className="fw-bold text-secondary mb-2 small text-uppercase ls-1 ms-1">
-                      Daftar Video {activeTab} ({videoList.length})
-                    </p>
+            {/* PLAYLIST SCROLL */}
+            <div className="row justify-content-center">
+              <div className="col-lg-11 col-xl-10">
+                <div className="playlist-container">
+                  <p className="fw-bold text-secondary mb-3 small text-uppercase ls-1 ms-1 border-bottom pb-2">
+                    Daftar Video {activeTab} ({videoList.length})
+                  </p>
 
-                    {/* CONTAINER SCROLL (MENGGUNAKAN CLASS 'playlist-scroll' YANG SUDAH DI-FIX) */}
-                    <div className="playlist-scroll">
-                      {videoList.map((video) => (
-                        <div
-                          key={video.id}
-                          className={`playlist-item shadow-sm ${
-                            currentVideo.id === video.id ? "active-video" : ""
-                          }`}
-                          onClick={() => setCurrentVideo(video)}
-                        >
-                          {/* Gambar Thumbnail */}
-                          <div className="wrapper-img">
-                            <img
-                              src={getYoutubeThumbnail(video.url)}
-                              alt={video.title}
-                            />
+                  <div className="playlist-scroll pb-3">
+                    {videoList.map((video) => (
+                      <div
+                        key={video.id}
+                        className={`playlist-item card border-0 shadow-sm ${currentVideo.id === video.id ? "active-video ring-2 ring-primary" : ""}`}
+                        onClick={() => setCurrentVideo(video)}
+                        style={{ cursor: "pointer", transition: "all 0.2s" }}
+                      >
+                        <div className="wrapper-img position-relative">
+                          <img
+                            src={getYoutubeThumbnail(video.url)}
+                            alt={video.title}
+                            className="card-img-top"
+                            style={{ objectFit: "cover", height: "100%" }}
+                          />
 
-                            {/* Badge Kategori */}
-                            <span
-                              className="position-absolute top-0 end-0 badge bg-dark m-2 bg-opacity-75 rounded-1"
-                              style={{ fontSize: "0.65rem" }}
-                            >
-                              {video.category === "Versi Mobile"
-                                ? "HP"
-                                : video.category === "Versi Web"
-                                  ? "WEB"
-                                  : "UMUM"}
-                            </span>
+                          <span
+                            className="position-absolute top-0 end-0 badge bg-dark m-2 bg-opacity-75 rounded-1"
+                            style={{ fontSize: "0.65rem" }}
+                          >
+                            {video.category === "Versi Mobile"
+                              ? "HP"
+                              : video.category === "Versi Web"
+                                ? "WEB"
+                                : "UMUM"}
+                          </span>
 
-                            {/* Overlay Play Icon */}
-                            <div className="play-overlay">
-                              {currentVideo.id === video.id && (
-                                <PlayCircle size={32} className="text-white" />
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Judul Video */}
-                          <div className="card-body p-2">
-                            <p
-                              className="card-text small fw-semibold text-dark text-truncate-2 mb-0"
-                              title={video.title}
-                            >
-                              {video.title}
-                            </p>
+                          <div className="play-overlay d-flex align-items-center justify-content-center">
+                            {currentVideo.id === video.id && (
+                              <PlayCircle
+                                size={32}
+                                className="text-white drop-shadow"
+                              />
+                            )}
                           </div>
                         </div>
-                      ))}
-                    </div>
+
+                        <div className="card-body p-2 bg-white">
+                          <p
+                            className="card-text small fw-semibold text-dark text-truncate-2 mb-0"
+                            title={video.title}
+                          >
+                            {video.title}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            </>
-          )
+            </div>
+          </>
+        ) : (
+          <div className="text-center py-5">
+            <div className="text-muted mb-3">
+              <Monitor size={48} className="opacity-25" />
+            </div>
+            <h5 className="fw-bold text-secondary">Belum Ada Video</h5>
+            <p className="text-muted small">
+              Video tutorial untuk kategori ini belum tersedia.
+            </p>
+          </div>
         )}
       </div>
     </section>
