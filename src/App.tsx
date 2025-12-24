@@ -1,30 +1,28 @@
 import React from "react";
-import "./App.css"; // Pastikan CSS ini diimport
+import "./App.css"; // Pastikan file CSS ini ada dan mengatur .app-layout
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/Hero";
-import ServiceGrid from "./components/Services";
+import ServiceGrid from "./components/Services"; // Pastikan Services.tsx export default-nya benar
 import TangerangNewsApp from "./components/News";
 import HubungiKami from "./components/Contact";
 import Structure from "./components/Structure";
-import Tutorial from "./components/Tutorial";
+import Video from "./components/Video";
 import Footer from "./components/Footer";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (
-    // --- PERBAIKAN DI SINI ---
-    // Hapus class 'px-10 py-10...' dan ganti dengan 'app-layout'
-    // Class 'app-layout' inilah yang membuat website ada di tengah (fixed width)
+    // Class 'app-layout' digunakan untuk mengatur layout utama (tengah/fixed width)
     <div className="app-layout">
       <Navbar />
 
-      {/* Bungkus konten utama (selain Navbar & Footer) di tag main agar rapi */}
+      {/* Konten utama dibungkus tag main */}
       <main>
         <HeroSection />
         <ServiceGrid />
         <TangerangNewsApp />
         <Structure />
-        <Tutorial />
+        <Video />
         <HubungiKami />
       </main>
 

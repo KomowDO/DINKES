@@ -1,0 +1,113 @@
+/* Container Background */
+.bg-light-gray {
+  background-color: #ffffffff;
+}
+
+.text-primary-dark {
+  color: #1e3a8a; /* Biru Tua sesuai referensi */
+}
+
+/* ================= KARTU UTAMA ================= */
+.coverage-card {
+  background-color: #e8f0ef;
+  border-radius: 24px; /* Sudut membulat besar seperti di gambar */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Agar footer kuning tidak keluar radius */
+  border: 1px solid #eee;
+}
+
+/* ================= BODY KARTU ================= */
+.coverage-card-body {
+  padding: 30px;
+}
+
+.coverage-title {
+  color: #1e3a8a;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  font-size: 1.1rem;
+}
+
+/* ================= MAIN VIDEO (BESAR) ================= */
+.main-video-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 16/9;
+}
+
+.main-thumb {
+  transition: transform 0.3s ease;
+}
+
+.main-video-wrapper:hover .main-thumb {
+  transform: scale(1.05);
+}
+
+/* Tombol Play Merah */
+.play-btn-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  transition: background 0.3s;
+}
+
+.play-btn-circle {
+  width: 50px;
+  height: 35px;
+  background-color: #ff0000 !important; /* Warna Merah Youtube */
+}
+
+/* Text Shadow untuk judul di atas video */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ================= LIST VIDEO (KECIL) ================= */
+.video-list-item {
+  cursor: pointer;
+}
+
+.list-thumb-wrapper {
+  width: 120px;
+  height: 68px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #1e3a8a; /* Teks Biru Tua */
+}
+
+/* ================= FOOTER BUTTON (KUNING) ================= */
+.coverage-card-footer {
+  background-color: #2ca29d; /* Kuning Emas */
+  border-top: 1px solid #000000ff;
+}
+
+.btn-see-more {
+  background: none;
+  border: none;
+  color: #ffffffff;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.btn-see-more:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}

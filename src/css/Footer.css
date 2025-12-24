@@ -12,6 +12,7 @@
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--footer-text);
   margin-top: 0;
+  overflow: hidden; /* pastikan gambar tidak keluar area */
 }
 
 .footer-container {
@@ -23,27 +24,19 @@
 /* --- 1. ILUSTRASI KOTA (LAYER PALING BAWAH) --- */
 .footer-illustration-wrapper {
   width: 100%;
-  line-height: 0;
-  font-size: 0;
-  background-color: transparent;
   position: relative;
-
-  /* Menarik gambar ke atas agar masuk ke area section contact */
-  margin-top: -200px;
-
-  /* PENTING: z-index 1 (Paling Kecil) */
-  /* Agar gambar ini berada DI BELAKANG icon contact */
-  z-index: 1;
-
-  pointer-events: none;
+  margin-top: -190px; /* tarik ke atas agar masuk area footer */
   margin-bottom: -1px;
+
+  z-index: 0; /* gambar di bawah konten */
+  pointer-events: none; /* tidak bisa menghalangi klik */
 }
 
 .footer-city-img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* --- 2. KONTEN UTAMA HIJAU (LAYER TENGAH) --- */
@@ -51,16 +44,11 @@
   background-color: var(--footer-bg);
   padding: 3rem 0 2rem;
 
-  /* Sudut melengkung di bawah */
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 
   position: relative;
-
-  /* PENTING: z-index 10 (Sedang) */
-  /* Lebih tinggi dari gambar (1), tapi lebih rendah dari contact (50) */
-  /* Fungsinya agar kotak hijau ini menutupi potongan bawah gambar kota */
-  z-index: 10;
+  z-index: 10; /* konten & tombol di atas gambar */
 }
 
 .footer-row {
@@ -180,6 +168,8 @@
 }
 
 /* RESPONSIVE */
+
+/* Mobile kecil */
 @media (max-width: 768px) {
   .footer-row {
     flex-direction: column;
@@ -192,5 +182,12 @@
 
   .footer-illustration-wrapper {
     margin-top: -50px; /* Sesuaikan jarak di HP */
+  }
+}
+
+/* Tablet besar (iPad Pro dsb) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .footer-illustration-wrapper {
+    margin-top: -120px; /* lebih pas di iPad Pro */
   }
 }

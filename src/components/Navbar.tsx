@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../css/Navbar.css";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../utils/translations";
 
 // --- INTERFACES ---
 interface Menu {
@@ -14,175 +16,357 @@ interface Menu {
   children?: Menu[];
 }
 
-// --- DATA DUMMY ---
-const DUMMY_MENUS: Menu[] = [
-  {
-    id_menu: 1,
-    menu_name: "PROFIL",
-    menu_url: "#",
-    status: "active",
-    order_number: 1,
-    sub_menu: [
-      {
-        id_menu: 11,
-        menu_name: "Tentang",
-        menu_url: "/tentang",
-        status: "active",
-      },
-      {
-        id_menu: 12,
-        menu_name: "Profil Pejabat Struktural",
-        menu_url: "/pejabat",
-        status: "active",
-      },
-      {
-        id_menu: 13,
-        menu_name: "Tugas dan Fungsi",
-        menu_url: "/tupoksi",
-        status: "active",
-      },
-      {
-        id_menu: 14,
-        menu_name: "Struktur Organisasi",
-        menu_url: "/struktur",
-        status: "active",
-      },
-    ],
-  },
-  {
-    id_menu: 2,
-    menu_name: "BERITA",
-    menu_url: "/berita",
-    status: "active",
-    order_number: 2,
-    sub_menu: [],
-  },
-  {
-    id_menu: 3,
-    menu_name: "PROGRAM",
-    menu_url: "#",
-    status: "active",
-    order_number: 3,
-    sub_menu: [
-      {
-        id_menu: 31,
-        menu_name: "Program SKPD",
-        menu_url: "/program",
-        status: "active",
-      },
-    ],
-  },
-  {
-    id_menu: 4,
-    menu_name: "INFORMASI PUBLIK",
-    menu_url: "#",
-    status: "active",
-    order_number: 4,
-    sub_menu: [
-      {
-        id_menu: 41,
-        menu_name: "Perencanaan",
-        menu_url: "/rencanaan",
-        status: "active",
-      },
-      {
-        id_menu: 42,
-        menu_name: "Laporan Keuangan",
-        menu_url: "/keuangan",
-        status: "active",
-      },
-      {
-        id_menu: 43,
-        menu_name: "Laporan Kinerja",
-        menu_url: "/Kinerja",
-        status: "active",
-      },
-      {
-        id_menu: 44,
-        menu_name: "Pendidikan dan Pelatihan",
-        menu_url: "/diklat",
-        status: "active",
-      },
-      {
-        id_menu: 45,
-        menu_name: "Pengadaan Barang / Jasa",
-        menu_url: "/pengadaan",
-        status: "active",
-      },
-      {
-        id_menu: 46,
-        menu_name: "Data Informasi Publik",
-        menu_url: "/data-informasi",
-        status: "active",
-      },
-      {
-        id_menu: 47,
-        menu_name: "Produk Hukum",
-        menu_url: "/produk-hukum",
-        status: "active",
-      },
-      {
-        id_menu: 48,
-        menu_name: "Informasi Umum",
-        menu_url: "/informasi-umum",
-        status: "active",
-      },
-      {
-        id_menu: 49,
-        menu_name: "Daftar Informasi Publik",
-        menu_url: "/daftar-informasi",
-        status: "active",
-      },
-    ],
-  },
-  {
-    id_menu: 5,
-    menu_name: "PPID",
-    menu_url: "#",
-    status: "active",
-    order_number: 5,
-    sub_menu: [
-      {
-        id_menu: 51,
-        menu_name: "Website PPID",
-        menu_url: "/ppid",
-        status: "active",
-      },
-      {
-        id_menu: 52,
-        menu_name: "Permohonan Informasi",
-        menu_url: "/permohonan",
-        status: "active",
-      },
-    ],
-  },
-  {
-    id_menu: 6,
-    menu_name: "GALERI",
-    menu_url: "#",
-    status: "active",
-    order_number: 6,
-    sub_menu: [
-      {
-        id_menu: 61,
-        menu_name: "Foto Kegiatan",
-        menu_url: "/foto",
-        status: "active",
-      },
-      { id_menu: 62, menu_name: "Video", menu_url: "/video", status: "active" },
-    ],
-  },
-  {
-    id_menu: 7,
-    menu_name: "KONTAK",
-    menu_url: "/kontak",
-    status: "active",
-    order_number: 7,
-    sub_menu: [],
-  },
-];
+// --- DATA MENU MULTI-BAHASA ---
+const MENU_DATA = {
+  id: [
+    {
+      id_menu: 1,
+      menu_name: "PROFIL",
+      menu_url: "#",
+      status: "active",
+      order_number: 1,
+      sub_menu: [
+        {
+          id_menu: 11,
+          menu_name: "Tentang",
+          menu_url: "/tentang",
+          status: "active",
+        },
+        {
+          id_menu: 12,
+          menu_name: "Profil Pejabat Struktural",
+          menu_url: "/pejabat",
+          status: "active",
+        },
+        {
+          id_menu: 13,
+          menu_name: "Tugas dan Fungsi",
+          menu_url: "/tupoksi",
+          status: "active",
+        },
+        {
+          id_menu: 14,
+          menu_name: "Struktur Organisasi",
+          menu_url: "/struktur",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 2,
+      menu_name: "BERITA",
+      menu_url: "/berita",
+      status: "active",
+      order_number: 2,
+      sub_menu: [],
+    },
+    {
+      id_menu: 3,
+      menu_name: "PROGRAM",
+      menu_url: "#",
+      status: "active",
+      order_number: 3,
+      sub_menu: [
+        {
+          id_menu: 31,
+          menu_name: "Program SKPD",
+          menu_url: "/program",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 4,
+      menu_name: "INFORMASI PUBLIK",
+      menu_url: "#",
+      status: "active",
+      order_number: 4,
+      sub_menu: [
+        {
+          id_menu: 41,
+          menu_name: "Perencanaan",
+          menu_url: "/rencanaan",
+          status: "active",
+        },
+        {
+          id_menu: 42,
+          menu_name: "Laporan Keuangan",
+          menu_url: "/keuangan",
+          status: "active",
+        },
+        {
+          id_menu: 43,
+          menu_name: "Laporan Kinerja",
+          menu_url: "/Kinerja",
+          status: "active",
+        },
+        {
+          id_menu: 44,
+          menu_name: "Pendidikan dan Pelatihan",
+          menu_url: "/diklat",
+          status: "active",
+        },
+        {
+          id_menu: 45,
+          menu_name: "Pengadaan Barang / Jasa",
+          menu_url: "/pengadaan",
+          status: "active",
+        },
+        {
+          id_menu: 46,
+          menu_name: "Data Informasi Publik",
+          menu_url: "/data-informasi",
+          status: "active",
+        },
+        {
+          id_menu: 47,
+          menu_name: "Produk Hukum",
+          menu_url: "/produk-hukum",
+          status: "active",
+        },
+        {
+          id_menu: 48,
+          menu_name: "Informasi Umum",
+          menu_url: "/informasi-umum",
+          status: "active",
+        },
+        {
+          id_menu: 49,
+          menu_name: "Daftar Informasi Publik",
+          menu_url: "/daftar-informasi",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 5,
+      menu_name: "PPID",
+      menu_url: "#",
+      status: "active",
+      order_number: 5,
+      sub_menu: [
+        {
+          id_menu: 51,
+          menu_name: "Website PPID",
+          menu_url: "/ppid",
+          status: "active",
+        },
+        {
+          id_menu: 52,
+          menu_name: "Permohonan Informasi",
+          menu_url: "/permohonan",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 6,
+      menu_name: "GALERI",
+      menu_url: "#",
+      status: "active",
+      order_number: 6,
+      sub_menu: [
+        {
+          id_menu: 61,
+          menu_name: "Foto Kegiatan",
+          menu_url: "/foto",
+          status: "active",
+        },
+        {
+          id_menu: 62,
+          menu_name: "Video",
+          menu_url: "/video",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 7,
+      menu_name: "KONTAK",
+      menu_url: "/kontak",
+      status: "active",
+      order_number: 7,
+      sub_menu: [],
+    },
+  ] as Menu[],
+
+  // Versi Bahasa Inggris (Diterjemahkan sesuai struktur Anda)
+  en: [
+    {
+      id_menu: 1,
+      menu_name: "PROFILE",
+      menu_url: "#",
+      status: "active",
+      order_number: 1,
+      sub_menu: [
+        {
+          id_menu: 11,
+          menu_name: "About Us",
+          menu_url: "/tentang",
+          status: "active",
+        },
+        {
+          id_menu: 12,
+          menu_name: "Structural Official Profiles",
+          menu_url: "/pejabat",
+          status: "active",
+        },
+        {
+          id_menu: 13,
+          menu_name: "Tasks and Functions",
+          menu_url: "/tupoksi",
+          status: "active",
+        },
+        {
+          id_menu: 14,
+          menu_name: "Organizational Structure",
+          menu_url: "/struktur",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 2,
+      menu_name: "NEWS",
+      menu_url: "/berita",
+      status: "active",
+      order_number: 2,
+      sub_menu: [],
+    },
+    {
+      id_menu: 3,
+      menu_name: "PROGRAM",
+      menu_url: "#",
+      status: "active",
+      order_number: 3,
+      sub_menu: [
+        {
+          id_menu: 31,
+          menu_name: "SKPD Program",
+          menu_url: "/program",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 4,
+      menu_name: "PUBLIC INFORMATION",
+      menu_url: "#",
+      status: "active",
+      order_number: 4,
+      sub_menu: [
+        {
+          id_menu: 41,
+          menu_name: "Planning",
+          menu_url: "/rencanaan",
+          status: "active",
+        },
+        {
+          id_menu: 42,
+          menu_name: "Financial Report",
+          menu_url: "/keuangan",
+          status: "active",
+        },
+        {
+          id_menu: 43,
+          menu_name: "Performance Report",
+          menu_url: "/Kinerja",
+          status: "active",
+        },
+        {
+          id_menu: 44,
+          menu_name: "Education and Training",
+          menu_url: "/diklat",
+          status: "active",
+        },
+        {
+          id_menu: 45,
+          menu_name: "Procurement",
+          menu_url: "/pengadaan",
+          status: "active",
+        },
+        {
+          id_menu: 46,
+          menu_name: "Public Info Data",
+          menu_url: "/data-informasi",
+          status: "active",
+        },
+        {
+          id_menu: 47,
+          menu_name: "Legal Products",
+          menu_url: "/produk-hukum",
+          status: "active",
+        },
+        {
+          id_menu: 48,
+          menu_name: "General Information",
+          menu_url: "/informasi-umum",
+          status: "active",
+        },
+        {
+          id_menu: 49,
+          menu_name: "List of Public Info",
+          menu_url: "/daftar-informasi",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 5,
+      menu_name: "PPID",
+      menu_url: "#",
+      status: "active",
+      order_number: 5,
+      sub_menu: [
+        {
+          id_menu: 51,
+          menu_name: "PPID Website",
+          menu_url: "/ppid",
+          status: "active",
+        },
+        {
+          id_menu: 52,
+          menu_name: "Information Request",
+          menu_url: "/permohonan",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 6,
+      menu_name: "GALLERY",
+      menu_url: "#",
+      status: "active",
+      order_number: 6,
+      sub_menu: [
+        {
+          id_menu: 61,
+          menu_name: "Activity Photos",
+          menu_url: "/foto",
+          status: "active",
+        },
+        {
+          id_menu: 62,
+          menu_name: "Video",
+          menu_url: "/video",
+          status: "active",
+        },
+      ],
+    },
+    {
+      id_menu: 7,
+      menu_name: "CONTACT",
+      menu_url: "/kontak",
+      status: "active",
+      order_number: 7,
+      sub_menu: [],
+    },
+  ] as Menu[],
+};
 
 function Navbar() {
+  const { language, setLanguage } = useLanguage(); // Panggil Context
+  const t = translations[language]; // Panggil Kamus
   const [menus, setMenus] = useState<Menu[]>([]);
 
   useEffect(() => {
@@ -193,14 +377,18 @@ function Navbar() {
           children: item.sub_menu ? mapMenuChildren(item.sub_menu) : [],
         }));
       };
-      const processedMenus = mapMenuChildren(DUMMY_MENUS);
+
+      // Pilih data berdasarkan bahasa (ID atau EN)
+      const currentData = language === "id" ? MENU_DATA.id : MENU_DATA.en;
+
+      const processedMenus = mapMenuChildren(currentData);
       processedMenus.sort(
         (a, b) => (a.order_number || 99) - (b.order_number || 99)
       );
       setMenus(processedMenus);
     };
     loadData();
-  }, []);
+  }, [language]); // Reload jika bahasa berubah
 
   const renderMenus = (menuList: Menu[], depth = 0) => {
     if (!Array.isArray(menuList) || menuList.length === 0) return null;
@@ -256,22 +444,15 @@ function Navbar() {
       className="d-flex flex-column shadow-md position-relative z-3"
       style={{
         width: "100%",
-        // --- PERBAIKAN DI SINI ---
-        marginTop: "0", // Ubah dari "30px" ke "0" agar nempel ke atas
+        marginTop: "0",
         padding: "0",
-
         background: "linear-gradient(90deg, #2ca29d 0%, #12726d 100%)",
-
-        // --- PERBAIKAN RADIUS ---
-        // Ubah dari "61px" ke "20px" agar PAS dengan sudut container (App.css)
         borderTopLeftRadius: "20px",
         borderTopRightRadius: "20px",
-
-        // Tetap pakai border fix untuk anti-aliasing
         border: "1px solid #2ca29d",
         boxSizing: "border-box",
         outline: "none",
-        overflow: "hidden", // Tambahan agar konten anak tidak "bocor" keluar radius
+        overflow: "hidden",
       }}
     >
       {/* HEADER ATAS */}
@@ -301,28 +482,31 @@ function Navbar() {
             className="logo-img mb-3 mt-7"
           />
           <h1 className="font-bold text-lg leading-snug tracking-wide m-0 text-white">
-            DINAS KESEHATAN <br /> KOTA TANGERANG
+            {/* Menggunakan data dari translations.ts */}
+            {t.dinkes_title} <br /> {t.city_name}
           </h1>
         </div>
 
-        {/* Bendera */}
+        {/* Bendera (Kontrol Bahasa) */}
         <div className="d-flex gap-2 position-absolute top-6 end-6 end-md-6">
           <img
             src="/assets/indo2.png"
             alt="ID"
-            className="w-8 h-8 rounded-circle cursor-pointer hover-opacity-100 transition"
+            onClick={() => setLanguage("id")} // Tombol set ke Indonesia
+            className={`w-8 h-8 rounded-circle cursor-pointer transition ${language === "id" ? "opacity-100 border border-2 border-white" : "opacity-50 hover-opacity-100"}`}
             style={{ width: "2rem", height: "2rem" }}
           />
           <img
             src="/assets/britain.jpg"
             alt="EN"
-            className="w-8 h-8 rounded-circle cursor-pointer hover-opacity-80 transition"
+            onClick={() => setLanguage("en")} // Tombol set ke Inggris
+            className={`w-8 h-8 rounded-circle cursor-pointer transition ${language === "en" ? "opacity-100 border border-2 border-white" : "opacity-50 hover-opacity-100"}`}
             style={{ width: "2rem", height: "2rem" }}
           />
         </div>
       </div>
 
-      {/* SEPARATOR (Garis Putih Tipis) - Bisa dihapus jika dianggap "masalah" */}
+      {/* SEPARATOR */}
       <div
         className="w-100 bg-white"
         style={{

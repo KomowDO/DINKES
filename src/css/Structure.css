@@ -1,176 +1,200 @@
 /* ===============================
-   WARNA & TEMA
+   1. GLOBAL STYLE & DESKTOP (Default >= 1200px)
 ================================ */
-.bg-green-light {
+.structure-section {
   background-color: #e8f0ef;
-  padding-top: 3rem;
-}
+  font-family: "Poppins", sans-serif;
+  position: relative;
 
-.bg-green-card-light {
-  background-color: #d5eae9;
-}
+  /* PERBAIKAN 1: Gunakan min-height, bukan fixed height */
+  /* Agar kalau layar pendek, konten tidak terpotong */
+  min-height: 90px0vh;
+  overflow: hidden;
 
-.bg-green-card-alt {
-  background-color: #ecf1ff;
+  /* Flexbox untuk menengahkan konten secara vertikal di layar besar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* PERBAIKAN 2: Tambahkan Padding Aman */
+  /* Mencegah judul nempel/terpotong di border atas */
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  /* PERBAIKAN 3: Izinkan scroll vertikal, hanya sembunyikan horizontal */
+  overflow-x: hidden;
 }
 
 .text-green-dark {
   color: #2ca29d;
 }
 
-.text-green-title {
-  color: #2ca29d;
-  font-size: 1rem;
-  font-weight: 700;
+/* --- Kolom Kiri: Ilustrasi & Teks Besar --- */
+.illustration-wrapper {
+  position: relative;
+  height: 600px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.text-green-jabatan {
-  color: #2ca29d;
-  font-size: 0.9rem;
+.bg-text {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-weight: 800;
+  font-size: 4rem;
+  line-height: 1.1;
+  color: transparent;
+  -webkit-text-stroke: 2px #b9d4d2;
+  z-index: 0;
+  text-transform: uppercase;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-/* ===============================
-   CARD (STYLE LAMA)
-================================ */
-.member-card {
-  width: 100%;
-  min-height: 130px;
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+.illustration-img {
+  position: relative;
+  z-index: 10;
+  max-height: 500px;
+  width: auto;
+  object-fit: contain;
+  margin-top: 150px;
+  transform: translateX(80px);
+}
+
+/* --- Kolom Kanan: List Container --- */
+.officials-list-container {
+  /* Scroll hanya terjadi di dalam kotak list ini */
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 15px;
+  padding-left: 20px;
+}
+
+/* Scrollbar Style */
+.officials-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+.officials-list-container::-webkit-scrollbar-track {
+  background: #dbeceb;
+  border-radius: 4px;
+}
+.officials-list-container::-webkit-scrollbar-thumb {
+  background: #2ca29d;
+  border-radius: 4px;
+}
+
+/* --- Card Style --- */
+.official-card {
   display: flex;
   align-items: center;
+  background-color: #d5eae9;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+.official-card:nth-child(even) {
+  background-color: #ffffff;
+}
+.official-card:hover {
+  transform: translateX(5px);
 }
 
-.member-img {
+.official-img-wrapper {
+  flex-shrink: 0;
   width: 90px;
-  height: 100px;
+  height: 90px;
+  margin-right: 20px;
+}
+.official-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 6px;
-  margin-right: 1rem;
+  border-radius: 12px;
 }
-
-/* ===============================
-   BANNER KIRI (DESKTOP + iPAD PRO)
-================================ */
-.image-text-container {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  height: 520px;
-  overflow: hidden;
+.official-info {
+  flex-grow: 1;
 }
-
-.overlay-text {
-  position: absolute;
-  top: 50px;
-  left: 20px;
-  font-family: "Poppins", sans-serif;
+.label-text {
+  font-size: 0.75rem;
   font-weight: 700;
-  font-size: 3.6rem;
-  line-height: 1.15;
-  white-space: pre-line;
-  color: transparent;
-  -webkit-text-stroke: 2px #d1e7e5;
-  pointer-events: none;
+  color: #555;
+  opacity: 0.8;
+  text-transform: uppercase;
 }
-
-.image-text-container img {
-  max-height: 420px;
-  transform: translateX(40px);
+.official-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #2ca29d;
+  margin: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
-
-/* ===============================
-   INNER SCROLL
-================================ */
-.custom-scrollbar {
-  max-height: 520px;
-  overflow-y: auto;
-  padding-right: 6px;
-}
-
-/* Scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #2ca29d;
-  border-radius: 3px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #dbeafe;
+.official-role {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2ca29d;
+  margin: 0;
+  line-height: 1.2;
 }
 
 /* ===============================
-   DESKTOP BESAR
+   2. MOBILE & TABLET (Layar < 1200px)
+   Termasuk iPad Pro, Tablet, dan HP
 ================================ */
-@media (min-width: 1200px) {
-  .image-text-container {
-    height: 650px;
+@media (max-width: 1199.98px) {
+  /* RESET LAYOUT */
+  .structure-section {
+    display: block; /* Hapus flex centering */
+    height: auto; /* Tinggi otomatis */
+    min-height: auto;
+
+    /* PERBAIKAN 4: Kecilkan padding mobile agar tidak "kelebihan" jarak bawah */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  .custom-scrollbar {
-    max-height: 650px;
-  }
-}
-
-/* ===============================
-   iPAD PRO SAJA
-================================ */
-@media (min-width: 1024px) and (max-width: 1199px) {
-  .image-text-container {
-    height: 520px;
-  }
-
-  .custom-scrollbar {
-    max-height: 520px;
-  }
-
-  .overlay-text {
-    font-size: 3.2rem;
-    top: 40px;
-    left: 10px;
-  }
-
-  .image-text-container img {
-    transform: translateX(70px) translateY(20px);
-    max-height: 400px;
-  }
-}
-
-/* =================================================
-   iPAD AIR + MOBILE
-   (≤1023px) → CARD SAJA
-================================================= */
-@media (max-width: 1023px) {
-  .col-left,
-  .image-text-container,
-  .image-text-container img,
-  .image-text-container .overlay-text {
+  /* Hilangkan elemen dekorasi berat */
+  .illustration-wrapper,
+  .bg-text,
+  .illustration-img {
     display: none !important;
   }
 
-  .custom-scrollbar {
+  /* Reset List Container */
+  .officials-list-container {
     max-height: none;
     overflow: visible;
-    padding-right: 0;
+    padding: 0;
+    margin-top: 1rem; /* Jarak kecil dari judul */
   }
 
-  .member-card {
-    padding: 0.75rem;
+  /* Card Mobile */
+  .official-card {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
   }
+}
 
-  .member-img {
-    width: 64px;
-    height: 72px;
+/* ===============================
+   3. HP KECIL (< 576px)
+================================ */
+@media (max-width: 575.98px) {
+  .official-img-wrapper {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
   }
-
-  .text-green-title {
+  .official-name {
     font-size: 0.95rem;
   }
-
-  .text-green-jabatan {
+  .official-role {
     font-size: 0.85rem;
   }
 }
